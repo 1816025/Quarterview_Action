@@ -11,7 +11,7 @@ class Actor
 public:
 	Actor();
 	~Actor();
-	bool Init(const int& id, const int& shadow);
+	bool Init(const int& id, const int& shadow,const Param& data);
 	void UpDate(void);
 	void Render(void);
 

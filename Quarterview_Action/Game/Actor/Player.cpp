@@ -12,7 +12,15 @@ Player::Player(const shared_Field field)
 	shotmng_ = std::make_shared<ShotMng>(field_);
 	auto id = MV1LoadModel("model/kiritan/kiritan.mv1");
 	auto shadow = MV1LoadModel("model/shadow/shadow.mv1");
-	Init(id,shadow);
+	Param data = {
+		id,
+		6,
+		0.0f,
+		VGet(50.0f,0.0f,50.0f),
+		VGet((DX_PI_F / 180 * -90),((DX_PI_F / 180) * ((6 * 45) - 90)),0.0f),
+		VGet(1.0f,1.0f,1.0f)
+	};
+	Init(id,shadow,data);
 }
 
 Player::~Player()
@@ -23,29 +31,6 @@ void Player::UpDate()
 {
 	lpMouse.UpDate();
 	Actor::UpDate();
-	play_time_ += 1.0f;
-	if (play_time_ >= total_time_)
-	{
-		play_time_ = 0.0f;
-	}
-
-	jump_force_ += gravity_;
-	data_.pos.y -= jump_force_;
-	if (field_->isBlock(data_.pos)&& state_ != STATE::FALL)
-	{
-		if (data_.pos.y <= 0)
-		{
-			state_ = STATE::LANDING;
-			jump_force_ = 0;
-			data_.pos.y = 0.0f;
-		}
-	}
-
-	if (data_.pos.y < 0)
-	{
-		state_ = STATE::FALL;
-	}
-
 	data_.dir = ((lpKeyBoard.GetKeyHold(KEY_INPUT_UP) || lpKeyBoard.GetKeyHold(KEY_INPUT_W)) ? 6 : data_.dir);
 	data_.dir = ((lpKeyBoard.GetKeyHold(KEY_INPUT_LEFT) || lpKeyBoard.GetKeyHold(KEY_INPUT_A)) ? 4 : data_.dir);
 	data_.dir = ((lpKeyBoard.GetKeyHold(KEY_INPUT_DOWN) || lpKeyBoard.GetKeyHold(KEY_INPUT_S)) ? 2 : data_.dir);
@@ -115,19 +100,6 @@ void Player::UpDate()
 	{
 		shotmng_->AddBullet(data_.pos, data_.dir);
 	}
-	data_.rol = VGet((DX_PI_F / 180 * -90), ((DX_PI_F / 180) * ((data_.dir * 45) - 90)), 0.0f);
-	MV1SetRotationXYZ(data_.id, data_.rol);
-	MV1SetPosition(data_.id,data_.pos);
-	MV1SetAttachAnimTime(data_.id, attach_Index_, play_time_);
-
-	MV1SetPosition(id_,VGet(data_.pos.x,0.0f, data_.pos.z));
-	MV1SetAttachAnimTime(id_, attach_Index_, play_time_);
-
-	if (shotmng_ != nullptr)
-	{
-		shotmng_->UpDate();
-	}
-
 }
 
 void Player::Shift_Dir(void)

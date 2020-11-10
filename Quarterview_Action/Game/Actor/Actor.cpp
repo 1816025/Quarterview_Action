@@ -11,17 +11,9 @@ Actor::~Actor()
 {
 }
 
-bool Actor::Init(const int& id, const int& shadow)
+bool Actor::Init(const int& id, const int& shadow, const Param& data)
 {
-	data_ =
-	{
-		id,
-		6,
-		0.0f,
-		VGet(50.0f,0.0f,50.0f),
-		VGet((DX_PI_F / 180 * -90),((DX_PI_F / 180) * ((6 * 45) - 90)),0.0f),
-		VGet(1.0f,1.0f,1.0f)
-	};
+	data_ = data;
 	id_ = shadow;
 	jump_flag_ = false;
 	gravity_ = 0.25;
@@ -40,6 +32,41 @@ bool Actor::Init(const int& id, const int& shadow)
 
 void Actor::UpDate(void)
 {
+	play_time_ += 1.0f;
+	if (play_time_ >= total_time_)
+	{
+		play_time_ = 0.0f;
+	}
+
+	jump_force_ += gravity_;
+	data_.pos.y -= jump_force_;
+	if (field_->isBlock(data_.pos) && state_ != STATE::FALL)
+	{
+		if (data_.pos.y <= 0)
+		{
+			state_ = STATE::LANDING;
+			jump_force_ = 0;
+			data_.pos.y = 0.0f;
+		}
+	}
+
+	if (data_.pos.y < 0)
+	{
+		state_ = STATE::FALL;
+	}
+
+	data_.rol = VGet(data_.rol.x, ((DX_PI_F / 180) * ((data_.dir * 45) - 90)),data_.rol.z);
+	MV1SetRotationXYZ(data_.id, data_.rol);
+	MV1SetPosition(data_.id, data_.pos);
+	MV1SetAttachAnimTime(data_.id, attach_Index_, play_time_);
+
+	MV1SetPosition(id_, VGet(data_.pos.x, 0.0f, data_.pos.z));
+	MV1SetAttachAnimTime(id_, attach_Index_, play_time_);
+
+	if (shotmng_ != nullptr)
+	{
+		shotmng_->UpDate();
+	}
 }
 
 void Actor::Render()
