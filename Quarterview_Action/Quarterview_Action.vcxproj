@@ -22,9 +22,9 @@
     <ClCompile Include="Application.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="common.cpp" />
+    <ClCompile Include="Game\Actor\Enemy\EnemyBase.cpp" />
     <ClCompile Include="Game\Actor\Enemy\Enemy2.cpp" />
     <ClCompile Include="Game\Actor\Actor.cpp" />
-    <ClCompile Include="Game\Actor\Enemy\EnemyMng.cpp" />
     <ClCompile Include="Game\Actor\Enemy\Enemy1.cpp" />
     <ClCompile Include="Game\Block.cpp" />
     <ClCompile Include="Game\Field.cpp" />
@@ -42,11 +42,11 @@
     <ClInclude Include="Application.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="common.h" />
+    <ClInclude Include="Game\Actor\Enemy\EnemyBase.h" />
     <ClInclude Include="Game\Actor\Enemy\Enemy2.h" />
     <ClInclude Include="EnemyMng.h" />
     <ClInclude Include="Game\Actor\Actor.h" />
     <ClInclude Include="Game\Actor\Enemy\Enemy1.h" />
-    <ClInclude Include="Game\Actor\Enemy\EnemyMng.h" />
     <ClInclude Include="Game\Block.h" />
     <ClInclude Include="Game\Field.h" />
     <ClInclude Include="Game\Actor\Player.h" />
