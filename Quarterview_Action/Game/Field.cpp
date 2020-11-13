@@ -1,11 +1,11 @@
-#include <DxLib.h>
 #include <Windows.h>
+#include <DxLib.h>
 #include <string>
 #include <random>
 
 #include "../_debug/_DebugConOut.h"
+#include "../Game/Object/Block.h"
 #include "../common.h"
-#include "Block.h"
 #include "Field.h"
 
 Field::Field()
@@ -59,10 +59,10 @@ std::shared_ptr<Block> Field::GetMapData(const int& x, const int& z)
 	return map_data_[x][z];
 }
 
-bool Field::isBlock(const VECTOR& pos)
+bool Field::isBlock(const float& pos_x, const float& pos_y, const float& pos_z)
 {
-	auto x = pos.x / 100;
-	auto z = pos.z / 100;
+	auto x = pos_x / 100;
+	auto z = pos_z / 100;
 	auto result = (x>=0 && x < FIELD_SIZE_X && z >= 0 && z <   FIELD_SIZE_Z);
 	return (result ? ((map_data_[x][z] == nullptr) ? false : true) : false);
 }

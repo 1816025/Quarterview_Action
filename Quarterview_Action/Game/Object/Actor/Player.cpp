@@ -1,13 +1,14 @@
 #include <DxLib.h>
 #include <cmath>
-#include "../../Input/KeyBoard.h"
-#include "../../Input/Mouse.h"
-#include "../../Game/Shot/ShotMng.h"
-#include "../Field.h"
+#include "../../../Input/KeyBoard.h"
+#include "../../../Input/Mouse.h"
+#include "../Shot/ShotMng.h"
+#include "../../Field.h"
 #include "Player.h"
 
 Player::Player(const shared_Field field)
 {
+	name_ = "Player";
 	field_ = field;
 	shotmng_ = std::make_shared<ShotMng>(field_);
 	auto id = MV1LoadModel("model/kiritan/kiritan.mv1");
@@ -66,7 +67,7 @@ void Player::UpDate()
 		auto npos_z = data_.pos.z - std::cos(data_.rol.y) * 5.0;
 		if (state_==STATE::LANDING)
 		{
-			if (field_->isBlock(VGet(npos_x, data_.pos.y, npos_z)))
+			if (field_->isBlock(npos_x, data_.pos.y, npos_z))
 			{
 				data_.pos.x = npos_x;
 				data_.pos.z = npos_z;

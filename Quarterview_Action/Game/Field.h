@@ -14,10 +14,9 @@ public:
 	bool Init(void);
 	void UpDate(void);
 	std::shared_ptr<Block> GetMapData(const int& x,const int& y);
-	bool isBlock(const VECTOR& pos);
+	bool isBlock(const float& x,const float& y,const float& z);
 private:
 	void Render(void);
-
 	int block_id_ = -1;
 	std::map<std::string,int> textur_id_;
 	Map_Data map_data_;

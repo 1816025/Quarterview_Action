@@ -1,8 +1,8 @@
 #include <DxLib.h>
 #include "../_debug/_DebugConOut.h"
 #include "../Camera.h"
-#include "../Game/Actor/Player.h"
-#include "../Game/Actor/Enemy/EnemyBase.h"
+#include "../Game/Object/Actor/Player.h"
+#include "../Game/Object/Actor/Enemy/EnemyBase.h"
 #include "../Game/Field.h"
 
 #include "GameScene.h"

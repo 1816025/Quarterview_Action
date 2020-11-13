@@ -30,6 +30,7 @@ std::vector<std::string> GetFileList(std::string directory)
 		if (win32fd.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY)
 		{
 			//Ä‰ğÍ‚Ì‚½‚ß‚»‚Ì‚Ü‚Ü”²‚¯‚é
+			int a = 0;
 		}
 		else {
 			std::string file_name = win32fd.cFileName;

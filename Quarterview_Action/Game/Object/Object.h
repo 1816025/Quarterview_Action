@@ -1,26 +1,27 @@
 #pragma once
 #include <mutex>
+#include <string>
 #include "../../common.h"
 
 class ShotMng;
 class Field;
-
 using shared_Field = std::shared_ptr<Field>;
-class Actor
+class Object
 {
 public:
-	Actor();
-	~Actor();
-	bool Init(const int& id, const int& shadow,const Param& data);
-	void UpDate(void);
-	void Render(void);
+	Object();
+	~Object();
 
 	const VECTOR& GetPos(void)
 	{
 		return data_.pos;
 	}
+
+	void UpDate(void);
+	void Render(void);
 protected:
-	void Animation(int no);
+	std::string name_;
+
 	Param data_;
 
 	int id_;			//‰e‚Ìid

@@ -1,6 +1,6 @@
 #include <DxLib.h>
-#include "../../../Game/Shot/ShotMng.h"
-#include "../../Field.h"
+#include "../../Shot/ShotMng.h"
+#include "../../../Field.h"
 #include "Enemy1.h"
 
 Enemy1::Enemy1()
@@ -9,6 +9,7 @@ Enemy1::Enemy1()
 
 Enemy1::Enemy1(const shared_Field field)
 {
+	name_ = "Kiritan";
 	field_ = field;
 	shotmng_ = std::make_shared<ShotMng>(field_);
 	auto id = MV1LoadModel("model/kiritan/kiritan.mv1");

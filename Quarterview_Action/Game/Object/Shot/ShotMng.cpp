@@ -1,5 +1,5 @@
 #include <DxLib.h>
-#include "../Field.h"
+#include "../../Field.h"
 #include "Shot.h"
 #include "ShotMng.h"
 

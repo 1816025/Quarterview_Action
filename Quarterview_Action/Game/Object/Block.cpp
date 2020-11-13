@@ -1,5 +1,5 @@
 #include <DxLib.h>
-#include "../common.h"
+#include "../../common.h"
 #include "Block.h"
 
 Block::Block(int id,int new_texture, VECTOR pos)

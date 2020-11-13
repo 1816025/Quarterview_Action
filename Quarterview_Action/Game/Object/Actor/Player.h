@@ -1,7 +1,7 @@
 #pragma once
 #include <mutex>
 #include "Actor.h"
-#include "../../common.h"
+#include "../../../common.h"
 
 class ShotMng;
 class Field;

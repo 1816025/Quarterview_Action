@@ -1,11 +1,13 @@
 #pragma once
 #include <mutex>
 #include <list>
-#include "../../common.h"
+#include "../Object.h"
+#include "../../../common.h"
 
 class Shot;
 class Field;
 class ShotMng
+	:public Object
 {
 public:
 	ShotMng(std::shared_ptr<Field> field);
@@ -17,7 +19,6 @@ public:
 private:
 	ShadowParam data_;
 	int interval;
-	std::shared_ptr<Field> field_;
 	std::list<Shot*> shot_;
 };
 
