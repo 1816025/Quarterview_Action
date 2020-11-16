@@ -5,6 +5,7 @@ class Field;
 class Camera;
 class Player;
 class EnemyBase;
+class Sky;
 class GameScene
 {
 public:
@@ -22,5 +23,6 @@ private:
 	std::shared_ptr<Camera> camera_;
 	std::shared_ptr<Player> player_;
 	std::shared_ptr<EnemyBase> enemy_;
+	std::shared_ptr<Sky> sky_;
 };
 

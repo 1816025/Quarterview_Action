@@ -1,9 +1,11 @@
 #include <DxLib.h>
 #include "../_debug/_DebugConOut.h"
+
 #include "../Camera.h"
+#include "../Game/Field.h"
+#include "../Game/Object/Sky.h"
 #include "../Game/Object/Actor/Player.h"
 #include "../Game/Object/Actor/Enemy/EnemyBase.h"
-#include "../Game/Field.h"
 
 #include "GameScene.h"
 
@@ -14,6 +16,7 @@ GameScene::GameScene()
 	if (!field_)
 	{
 		field_ = std::make_shared<Field>();
+		sky_ = std::make_shared<Sky>();
 		enemy_ = std::make_shared<EnemyBase>(field_);
 		player_ = std::make_shared<Player>(field_);
 		camera_ = std::make_shared<Camera>(player_);
@@ -37,6 +40,7 @@ void GameScene::Run()
 
 void GameScene::Render(void)
 {
+	sky_->Render();
 	player_->Render();
 	enemy_->Render();
 }
