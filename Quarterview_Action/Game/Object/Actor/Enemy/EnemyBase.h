@@ -32,6 +32,8 @@ public:
 	void Render(void);
 	void Spawner(EnemyType id);
 private:
+	int frame;
+
 	std::shared_ptr<Enemy1> enemy1_;
 	std::shared_ptr<Enemy2> enemy2_;
 	std::list<EnemyStatus> enemyList_;

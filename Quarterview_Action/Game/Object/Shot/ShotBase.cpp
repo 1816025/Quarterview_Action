@@ -7,7 +7,6 @@ ShotBase::ShotBase()
 ShotBase::~ShotBase()
 {
 }
-
 void ShotBase::UpDate(void)
 {
 	Range--;
@@ -18,10 +17,18 @@ void ShotBase::UpDate(void)
 		_is_remove = true;
 	}
 	MV1SetPosition(id_, VGet(data_.pos.x, 0, data_.pos.z));
+	MV1SetRotationXYZ(data_.id, VGet(data_.rol.x, ((DX_PI_F / 180) * (rol += 20)), data_.rol.z));
+	MV1SetPosition(data_.id, VGet(data_.pos.x, 0, data_.pos.z));
 }
 
 void ShotBase::Render(void)
 {
 	Object::Render();
-	DrawSphere3D(data_.pos, 10, 4, 0xff0000, 0xff0000, true);
+	MV1DrawModel(data_.id);
 }
+
+const bool ShotBase::IsRemove(void)
+{
+	return _is_remove;
+}
+

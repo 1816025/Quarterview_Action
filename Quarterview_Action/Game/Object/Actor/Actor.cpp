@@ -40,6 +40,12 @@ void Actor::Render(void)
 	}
 }
 
+void Actor::UpDate(void)
+{
+	shotmng_->AddBullet(data_.pos, data_.dir);
+	Object::UpDate();
+}
+
 void Actor::DrawStatus()
 {
 	VECTOR pos = ConvWorldPosToScreenPos(VGet(data_.pos.x, data_.pos.y + 500.0f, data_.pos.z));

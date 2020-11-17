@@ -8,9 +8,6 @@
 
 Player::Player(const shared_Field field)
 {
-	name_ = "Player";
-	field_ = field;
-	shotmng_ = std::make_shared<ShotMng>(field_);
 	auto id = MV1LoadModel("model/kiritan/kiritan.mv1");
 	auto shadow = MV1LoadModel("model/shadow/shadow.mv1");
 	Param data = {
@@ -22,6 +19,11 @@ Player::Player(const shared_Field field)
 		VGet(1.0f,1.0f,1.0f)
 	};
 	Init(id,shadow,data);
+
+	name_ = "Player";
+	field_ = field;
+	data.id = MV1LoadModel("model/bullet/bullet2.mv1");
+	shotmng_ = std::make_shared<ShotMng>(ShooterType::PLAYER,data,field_);
 }
 
 Player::~Player()
@@ -31,7 +33,7 @@ Player::~Player()
 void Player::UpDate()
 {
 	lpMouse.UpDate();
-	Actor::UpDate();
+	Object::UpDate();
 	data_.dir = ((lpKeyBoard.GetKeyHold(KEY_INPUT_UP) || lpKeyBoard.GetKeyHold(KEY_INPUT_W)) ? 6 : data_.dir);
 	data_.dir = ((lpKeyBoard.GetKeyHold(KEY_INPUT_LEFT) || lpKeyBoard.GetKeyHold(KEY_INPUT_A)) ? 4 : data_.dir);
 	data_.dir = ((lpKeyBoard.GetKeyHold(KEY_INPUT_DOWN) || lpKeyBoard.GetKeyHold(KEY_INPUT_S)) ? 2 : data_.dir);

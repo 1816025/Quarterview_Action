@@ -8,6 +8,9 @@ public:
 	~ShotBase();
 	void UpDate(void);
 	void Render(void);
+	const bool IsRemove(void);
+private:
+	float rol;
 protected:
 	/*true: remove‚Å‚«‚é false: remove‚Å‚«‚È‚¢*/
 	float Range;

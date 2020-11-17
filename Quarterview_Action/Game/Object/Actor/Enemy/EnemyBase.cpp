@@ -48,6 +48,7 @@ void EnemyBase::Spawner(EnemyType id)
 		enemyList_.emplace_back(status);
 		break;
 	default:
+		
 		break;
 	}
 }

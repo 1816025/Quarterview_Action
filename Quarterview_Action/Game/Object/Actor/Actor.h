@@ -16,6 +16,7 @@ public:
 	~Actor();
 	bool Init(const int& id, const int& shadow,const Param& data);
 	virtual void Render(void);
+	virtual void UpDate(void);
 private:
 	void DrawStatus();
 protected:

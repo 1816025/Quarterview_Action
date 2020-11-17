@@ -28,7 +28,7 @@ bool Application::SysInit(void)
 	SetWriteZBuffer3D(true);	//Zバッファへの書き込み有効化
 	SetUseBackCulling(true);	//バックカリングの有効化
 	SetUseLighting(false);		//ライティングの無効化
-	SetBackgroundColor(128, 255, 128);
+	SetBackgroundColor(0, 0, 0);
 	if (_game == nullptr)
 	{
 		_game = new GameScene();

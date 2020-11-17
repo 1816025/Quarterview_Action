@@ -1,16 +1,19 @@
 #include <DxLib.h>
 #include "../../Field.h"
 #include "Shot.h"
+#include "EnemyShot.h"
 #include "ShotMng.h"
 
-ShotMng::ShotMng(std::shared_ptr<Field> field)
+ShotMng::ShotMng(ShooterType type,Param param, std::shared_ptr<Field> field)
 {
-	data_ =
+	type_ = type;
+	data_ = param;
+	shadow_ =
 	{
 		MV1LoadModel("model/shadow/shadow.mv1"),
 		VGet(0.0f,0.0f,0.0f),
 		VGet(1.0f,1.0f,1.0f),
-		VGet(0.3f,1.0f,0.3f)
+		VGet(0.5f,0.5f,0.5f)
 	};
 	field_ = field;
 	interval = 0;
@@ -26,21 +29,32 @@ void ShotMng::AddBullet(const VECTOR& pos, const int& dir)
 	if (interval % 2 == 0)
 	{
 		interval = 0;
-		data_.pos = pos;
-		shot_.push_front(new Shot(pos, dir,data_,field_));
+		data_.pos = VGet(pos.x,pos.y +80.0f,pos.z);
+
+		switch (type_)
+		{
+		case ShooterType::PLAYER:
+			shotList_.push_front(new Shot(pos, dir,data_,shadow_, field_));
+			break;
+		case ShooterType::ENEMY:
+			shotList_.push_front(new EnemyShot(pos, dir,data_,shadow_, field_));
+			break;
+		default:
+			break;
+		}
 	}
 }
 
 void ShotMng::UpDate(void)
 {
-	if (!shot_.empty())
+	if (!shotList_.empty())
 	{
-		for (auto itr = shot_.begin(); itr != shot_.end(); )
+		for (auto itr = shotList_.begin(); itr != shotList_.end(); )
 		{
 			(*itr)->UpDate();
 			if ((*itr)->IsRemove())
 			{
-				itr = shot_.erase(itr);
+				itr = shotList_.erase(itr);
 			}
 			else
 			{
@@ -52,10 +66,10 @@ void ShotMng::UpDate(void)
 
 void ShotMng::Render(void)
 {
-	DrawFormatString(0, 0, 0xff0000, "_shot.size() == %d", shot_.size());
-	if (!shot_.empty())
+	DrawFormatString(0, 0, 0xff0000, "_shot.size() == %d", shotList_.size());
+	if (!shotList_.empty())
 	{
-		for (auto shot : shot_)
+		for (auto shot : shotList_)
 		{
 			shot->Render();
 		}
