@@ -18,7 +18,7 @@ void ShotBase::UpDate(void)
 	}
 	MV1SetPosition(id_, VGet(data_.pos.x, 0, data_.pos.z));
 	MV1SetRotationXYZ(data_.id, VGet(data_.rol.x, ((DX_PI_F / 180) * (rol += 20)), data_.rol.z));
-	MV1SetPosition(data_.id, VGet(data_.pos.x, 0, data_.pos.z));
+	MV1SetPosition(data_.id, VGet(data_.pos.x,data_.pos.y, data_.pos.z));
 }
 
 void ShotBase::Render(void)
