@@ -5,7 +5,7 @@
 
 Shot::Shot(const VECTOR& pos, int dir,Param param,ShadowParam shadow,std::shared_ptr<Field> field)
 {
-	field_ = field;
+	ShotBase::field_ = field;
 
 	data_.pos = VGet(pos.x, pos.y + 80.0f,pos.z);
 	data_.dir = dir;

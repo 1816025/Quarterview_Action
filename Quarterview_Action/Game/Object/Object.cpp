@@ -45,7 +45,7 @@ void Object::UpDate(void)
 
 	if (shotmng_ != nullptr)
 	{
-		shotmng_->UpDate();
+		shotmng_->UpDate(name_);
 	}
 }
 

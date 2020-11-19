@@ -29,20 +29,20 @@ bool Actor::Init(const int& id, const int& shadow, const Param& data)
 	Animation(anim_no_);
 	return true;
 }
-void Actor::Render(void)
+void Actor::Render(std::string name)
 {
 	Object::Render();
 	MV1DrawModel(data_.id);
 	DrawStatus();
 	if (shotmng_ != nullptr)
 	{
-		shotmng_->Render();
+		shotmng_->Render(name);
 	}
 }
 
 void Actor::UpDate(void)
 {
-	shotmng_->AddBullet(data_.pos, data_.dir);
+	shotmng_->AddBullet(name_,data_.pos, data_.dir);
 	Object::UpDate();
 }
 

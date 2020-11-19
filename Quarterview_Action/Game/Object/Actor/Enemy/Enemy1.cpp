@@ -7,7 +7,7 @@ Enemy1::Enemy1()
 {
 }
 
-Enemy1::Enemy1(const shared_Field field)
+Enemy1::Enemy1(const shared_Field& field,const shared_ShotMng& shotmng)
 {
 	auto id = MV1LoadModel("model/kiritan/kiritan.mv1");
 	auto shadow = MV1LoadModel("model/shadow/shadow.mv1");
@@ -21,10 +21,9 @@ Enemy1::Enemy1(const shared_Field field)
 	};
 	Init(id, shadow, data);
 
-	data.id = MV1LoadModel("model/bullet/bullet1.mv1");
 	name_ = "Kiritan";
 	field_ = field;
-	shotmng_ = std::make_shared<ShotMng>(ShooterType::ENEMY, data, field_);
+	shotmng_ = shotmng;
 }
 
 Enemy1::~Enemy1()

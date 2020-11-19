@@ -1,3 +1,4 @@
+#include "../../Shot/ShotMng.h"
 #include "Enemy1.h"
 #include "Enemy2.h"
 #include "EnemyBase.h"
@@ -8,8 +9,10 @@ EnemyBase::EnemyBase()
 
 EnemyBase::EnemyBase(const shared_Field field)
 {
-	enemy1_  = std::make_shared<Enemy1>(field);
-	enemy2_  = std::make_shared<Enemy2>(field);
+	field_ = field;
+	shotmng_ = std::make_shared<ShotMng>(ShooterType::ENEMY,MV1LoadModel("model/bullet/bullet1.mv1"), field_);
+	enemy1_  = std::make_shared<Enemy1>(field,shotmng_);
+	enemy2_  = std::make_shared<Enemy2>(field,shotmng_);
 }
 
 EnemyBase::~EnemyBase()
@@ -28,7 +31,7 @@ void EnemyBase::Render(void)
 {
 	for (auto enemy : enemyList_)
 	{
-		enemy.ptr->Actor::Render();
+		enemy.ptr->Actor::Render(enemy.name);
 	}
 }
 

@@ -4,10 +4,11 @@
 #include "EnemyShot.h"
 #include "ShotMng.h"
 
-ShotMng::ShotMng(ShooterType type,Param param, std::shared_ptr<Field> field)
+ShotMng::ShotMng(ShooterType type,int id, std::shared_ptr<Field> field)
 {
+	field_ = field;
 	type_ = type;
-	data_ = param;
+	data_.id = id;
 	shadow_ =
 	{
 		MV1LoadModel("model/shadow/shadow.mv1"),
@@ -15,29 +16,27 @@ ShotMng::ShotMng(ShooterType type,Param param, std::shared_ptr<Field> field)
 		VGet(1.0f,1.0f,1.0f),
 		VGet(0.5f,0.5f,0.5f)
 	};
-	field_ = field;
-	interval = 0;
 }
 
 ShotMng::~ShotMng()
 {
 }
 
-void ShotMng::AddBullet(const VECTOR& pos, const int& dir)
+void ShotMng::AddBullet(const std::string name, const VECTOR& pos, const int& dir)
 {
-	interval++;
-	if (interval % 2 == 0)
+	interval[name]++;
+	if (interval[name] % 2 == 0)
 	{
-		interval = 0;
+		interval[name] = 0;
 		data_.pos = VGet(pos.x,pos.y +80.0f,pos.z);
 
 		switch (type_)
 		{
 		case ShooterType::PLAYER:
-			shotList_.push_front(new Shot(pos, dir,data_,shadow_, field_));
+			shotList_.push_front(ShotData{ name,new Shot(pos, dir,data_,shadow_, field_) });
 			break;
 		case ShooterType::ENEMY:
-			shotList_.push_front(new EnemyShot(pos, dir,data_,shadow_, field_));
+			shotList_.push_front(ShotData{ name, new EnemyShot(pos, dir, data_, shadow_, field_)});
 			break;
 		default:
 			break;
@@ -45,14 +44,17 @@ void ShotMng::AddBullet(const VECTOR& pos, const int& dir)
 	}
 }
 
-void ShotMng::UpDate(void)
+void ShotMng::UpDate(std::string name)
 {
 	if (!shotList_.empty())
 	{
 		for (auto itr = shotList_.begin(); itr != shotList_.end(); )
 		{
-			(*itr)->UpDate();
-			if ((*itr)->IsRemove())
+			if ((*itr).unitName == name)
+			{
+				(*itr).shot->UpDate();
+			}
+			if ((*itr).shot->IsRemove())
 			{
 				itr = shotList_.erase(itr);
 			}
@@ -64,14 +66,17 @@ void ShotMng::UpDate(void)
 	}
 }
 
-void ShotMng::Render(void)
+void ShotMng::Render(std::string name)
 {
 	DrawFormatString(0, 0, 0xff0000, "_shot.size() == %d", shotList_.size());
 	if (!shotList_.empty())
 	{
 		for (auto shot : shotList_)
 		{
-			shot->Render();
+			if (shot.unitName == name)
+			{
+				shot.shot->Render();
+			}
 		}
 	}
 }

@@ -23,7 +23,7 @@ Player::Player(const shared_Field field)
 	name_ = "Player";
 	field_ = field;
 	data.id = MV1LoadModel("model/bullet/bullet2.mv1");
-	shotmng_ = std::make_shared<ShotMng>(ShooterType::PLAYER,data,field_);
+	shotmng_ = std::make_shared<ShotMng>(ShooterType::PLAYER,data.id,field_);
 }
 
 Player::~Player()
@@ -101,7 +101,7 @@ void Player::UpDate()
 	}
 	if (lpMouse.GetMouseHold())
 	{
-		shotmng_->AddBullet(data_.pos, data_.dir);
+		shotmng_->AddBullet(name_,data_.pos, data_.dir);
 	}
 }
 

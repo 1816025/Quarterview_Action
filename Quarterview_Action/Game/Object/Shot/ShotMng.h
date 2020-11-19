@@ -1,6 +1,8 @@
 #pragma once
 #include <mutex>
 #include <list>
+#include <map>
+#include <string>
 #include "../Object.h"
 #include "../../../common.h"
 enum class ShooterType
@@ -13,20 +15,25 @@ class Field;
 class ShotBase;
 class EnemyShot;
 class Shot;
+struct ShotData
+{
+	std::string unitName;
+	ShotBase* shot;
+};
 class ShotMng
 	:public Object
 {
 public:
-	ShotMng(ShooterType type,Param param,std::shared_ptr<Field> field);
+	ShotMng(ShooterType type,int id,std::shared_ptr<Field> field);
 	~ShotMng();
 
-	void AddBullet(const VECTOR& pos, const int& dir);
-	void UpDate(void);
-	void Render(void);
+	void AddBullet(const std::string name,const VECTOR& pos, const int& dir);
+	void UpDate(std::string name);
+	void Render(std::string name);
 private:
 	ShadowParam shadow_;
-	int interval;
+	std::map<std::string,int> interval;
 	ShooterType type_;
-	std::list<ShotBase*> shotList_;
+	std::list<ShotData> shotList_;
 };
 

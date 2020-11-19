@@ -41,6 +41,6 @@ void GameScene::Run()
 void GameScene::Render(void)
 {
 	sky_->Render();
-	player_->Render();
+	player_->Render("Player");
 	enemy_->Render();
 }
