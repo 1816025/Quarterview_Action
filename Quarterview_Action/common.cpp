@@ -1,6 +1,12 @@
 #include <Windows.h>
 #include <stdexcept>
+#include <list>
 #include "common.h"
+std::list<std::string> pathList;
+std::vector<std::string> modelList;
+std::vector<std::string> textureList;
+//もでるでーた
+//てくすちゃ
 
 std::vector<std::string> GetFileList(std::string directory)
 {
@@ -9,11 +15,15 @@ std::vector<std::string> GetFileList(std::string directory)
 	WIN32_FIND_DATA win32fd;	
 	//検出したファイル名を保存する
 	std::vector<std::string> file_names;
-
+	if (pathList.empty())
+	{
+		pathList.push_front(directory + "/");
+	}
+	auto searchPath = pathList.back() + "/*";
 	/*FindFirstFile: 
 	 特定の名前と一致する名前を持つディレクトリ内のファイルまたはサブディレクトリを検索する
 	 なお名前はワイルドカードでも可*/
-	h_find = FindFirstFile(directory.c_str(), &win32fd);
+	h_find = FindFirstFile(searchPath.c_str(), &win32fd);
 
 	if (h_find == INVALID_HANDLE_VALUE) {
 		throw std::runtime_error("file not found");
@@ -29,14 +39,31 @@ std::vector<std::string> GetFileList(std::string directory)
 	do {
 		if (win32fd.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY)
 		{
-			//再解析のためそのまま抜ける
-			int a = 0;
+			if (win32fd.cFileName[0] == '.')
+			{
+				continue;
+			}
+			pathList.push_front(directory+"/"+ win32fd.cFileName);
 		}
 		else {
 			std::string file_name = win32fd.cFileName;
+			
+			if (file_name.find("mv1") != std::string::npos)
+			{
+				modelList.push_back(file_name);
+			}
+			else if (searchPath.find("texture") != std::string::npos)
+			{
+				textureList.push_back(file_name);
+			}
 			file_names.push_back(file_name.c_str());
 		}
 	} while (FindNextFile(h_find, &win32fd));
+	pathList.pop_back();
+	if (!pathList.empty())
+	{
+		GetFileList(pathList.back());
+	}
 	/*FindNextFile:
 	 この関数がファイル名を返す順序は、ファイルシステムのタイプによって異なる。
 	 NTFSファイルシステムとCDFSファイルシステムでは、名前は通常アルファベット順に返される。
@@ -54,7 +81,17 @@ std::vector<std::string> GetFileList(std::string directory)
     GetLastError関数はERROR_NO_MORE_FILESを返す。*/
 	FindClose(h_find);
 
-	return file_names;
+	return textureList;
+}
+
+const std::vector<std::string> GetTextureList()
+{
+	return textureList;
+}
+
+const std::vector<std::string> GetModelList()
+{
+	return modelList;
 }
 
 const VECTOR operator+(const VECTOR& vec, const VECTOR& vec2)

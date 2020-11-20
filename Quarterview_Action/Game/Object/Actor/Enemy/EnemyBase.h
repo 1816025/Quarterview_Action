@@ -26,7 +26,7 @@ public:
 		std::shared_ptr<EnemyBase> ptr;
 	};
 	EnemyBase();
-	EnemyBase(const shared_Field field);
+	EnemyBase(const shared_Field field,std::vector<std::string>modelList);
 	~EnemyBase();
 	void UpDate(void);
 	void Render(void);

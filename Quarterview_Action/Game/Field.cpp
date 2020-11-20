@@ -8,14 +8,14 @@
 #include "../common.h"
 #include "Field.h"
 
-Field::Field()
+Field::Field(std::vector<std::string>file_name)
 {
 	std::default_random_engine engine;
 	std::random_device seed_gen;
 	engine.seed(seed_gen());
 	if (block_id_ == -1)
 	{
-		auto file_name = GetFileList("model/block/texture/*.png");
+		//auto file_name = GetFileList("model");
 
 		for (auto name : file_name)
 		{

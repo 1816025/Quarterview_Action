@@ -9,7 +9,7 @@ using Map_Data = std::array<std::array<std::shared_ptr<Block>, 30>, 10>;
 class Field
 {
 public:
-	Field();
+	Field(std::vector<std::string> file_name);
 	~Field();
 	bool Init(void);
 	void UpDate(void);

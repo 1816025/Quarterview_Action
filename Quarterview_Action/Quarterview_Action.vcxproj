@@ -21,6 +21,7 @@
   <ItemGroup>
     <ClCompile Include="Application.cpp" />
     <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="Collision.cpp" />
     <ClCompile Include="common.cpp" />
     <ClCompile Include="Game\Object\Shot\EnemyShot.cpp" />
     <ClCompile Include="Game\Field.cpp" />
@@ -45,6 +46,7 @@
   <ItemGroup>
     <ClInclude Include="Application.h" />
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="Collision.h" />
     <ClInclude Include="common.h" />
     <ClInclude Include="Game\Object\Shot\EnemyShot.h" />
     <ClInclude Include="Game\Object\Actor\Enemy\EnemyBase.h" />

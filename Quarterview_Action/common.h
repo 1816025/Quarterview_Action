@@ -11,7 +11,6 @@ constexpr auto SCREEN_SIZE_Y = 600;
 constexpr auto FIELD_SIZE_X = 10;
 constexpr auto FIELD_SIZE_Z = 30;
 constexpr auto BLOCK_SIZE = 100.0f;
-
 struct ShadowParam
 {
 	int id;
@@ -39,5 +38,7 @@ enum class STATE
 };
 
 std::vector<std::string> GetFileList(std::string directory);
+const std::vector<std::string> GetTextureList();
+const std::vector<std::string> GetModelList();
 const VECTOR operator+(const VECTOR& vec, const VECTOR& vec2);
 const VECTOR operator*(const VECTOR& vec, const float& value);

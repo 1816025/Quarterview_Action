@@ -1,5 +1,6 @@
 #include <DxLib.h>
 #include "../_debug/_DebugConOut.h"
+#include "../common.h"
 
 #include "../Camera.h"
 #include "../Game/Field.h"
@@ -15,7 +16,7 @@ GameScene::GameScene()
 
 	if (!field_)
 	{
-		field_ = std::make_shared<Field>();
+		field_ = std::make_shared<Field>(GetTextureList());
 		sky_ = std::make_shared<Sky>();
 		enemy_ = std::make_shared<EnemyBase>(field_);
 		player_ = std::make_shared<Player>(field_);
