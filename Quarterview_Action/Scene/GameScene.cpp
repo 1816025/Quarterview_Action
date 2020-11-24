@@ -5,6 +5,7 @@
 #include "../Camera.h"
 #include "../Game/Field.h"
 #include "../Game/Object/Sky.h"
+#include "../Game/Object/Actor/Actor.h"
 #include "../Game/Object/Actor/Player.h"
 #include "../Game/Object/Actor/Enemy/EnemyBase.h"
 
@@ -13,17 +14,15 @@
 GameScene::GameScene()
 {
 	TRACE("GameScene\n");
-
+	GetFileList("model");
 	if (!field_)
 	{
 		field_ = std::make_shared<Field>(GetTextureList());
 		sky_ = std::make_shared<Sky>();
-		enemy_ = std::make_shared<EnemyBase>(field_);
+		enemy_ = std::make_shared<EnemyBase>(field_,GetModelList());
 		player_ = std::make_shared<Player>(field_);
 		camera_ = std::make_shared<Camera>(player_);
 	}
-	enemy_->Spawner(EnemyType::Kiritan);
-	enemy_->Spawner(EnemyType::Itako);
 }
 
 GameScene::~GameScene()
@@ -42,6 +41,6 @@ void GameScene::Run()
 void GameScene::Render(void)
 {
 	sky_->Render();
-	player_->Render("Player");
+	player_->Render();
 	enemy_->Render();
 }

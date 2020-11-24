@@ -19,6 +19,7 @@ public:
 
 	void UpDate(void);
 	void Render(void);
+	void Collision();
 protected:
 	std::string name_;
 

@@ -8,7 +8,7 @@ std::vector<std::string> textureList;
 //もでるでーた
 //てくすちゃ
 
-std::vector<std::string> GetFileList(std::string directory)
+const void GetFileList(std::string directory)
 {
 	HANDLE h_find;
 	//FindNextFile関数によって検出されたファイルに関する情報が含まれる。
@@ -80,8 +80,6 @@ std::vector<std::string> GetFileList(std::string directory)
 　  一致するファイルが見つからないために関数が失敗した場合、
     GetLastError関数はERROR_NO_MORE_FILESを返す。*/
 	FindClose(h_find);
-
-	return textureList;
 }
 
 const std::vector<std::string> GetTextureList()

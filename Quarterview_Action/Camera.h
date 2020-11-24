@@ -1,8 +1,8 @@
 #pragma once
 #include <mutex>
 
-class Player;
-using shared_Player = std::shared_ptr<Player>;
+class Actor;
+using shared_Player = std::shared_ptr<Actor>;
 class Camera
 {
 public:

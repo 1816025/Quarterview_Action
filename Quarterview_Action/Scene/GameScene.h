@@ -3,7 +3,7 @@
 
 class Field;
 class Camera;
-class Player;
+class Actor;
 class EnemyBase;
 class Sky;
 class GameScene
@@ -21,8 +21,8 @@ private:
 	std::shared_ptr<Field> field_;
 	//Camera‚Ìƒ|ƒCƒ“ƒ^
 	std::shared_ptr<Camera> camera_;
-	std::shared_ptr<Player> player_;
-	std::shared_ptr<EnemyBase> enemy_;
+	std::shared_ptr<Actor> player_;
+	std::shared_ptr<Actor> enemy_;
 	std::shared_ptr<Sky> sky_;
 };
 

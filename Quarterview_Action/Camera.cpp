@@ -4,6 +4,7 @@
 #include "Input/KeyBoard.h"
 
 #include "Game/Object/Actor/Player.h"
+#include "Game/Object/Actor/Actor.h"
 #include "Camera.h"
 
 Camera::Camera(const shared_Player player)

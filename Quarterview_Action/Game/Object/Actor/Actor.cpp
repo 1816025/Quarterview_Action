@@ -1,6 +1,9 @@
 #include <DxLib.h>
 #include "../../Field.h"
 #include "../../Object/Shot/ShotMng.h"
+#include "Enemy/EnemyBase.h"
+#include "Enemy/Enemy1.h"
+#include "Enemy/Enemy2.h"
 #include "Actor.h"
 
 Actor::Actor()
@@ -29,6 +32,10 @@ bool Actor::Init(const int& id, const int& shadow, const Param& data)
 	Animation(anim_no_);
 	return true;
 }
+void Actor::Render(void)
+{
+	Render(name_);
+}
 void Actor::Render(std::string name)
 {
 	Object::Render();
@@ -42,8 +49,8 @@ void Actor::Render(std::string name)
 
 void Actor::UpDate(void)
 {
-	shotmng_->AddBullet(name_,data_.pos, data_.dir);
-	Object::UpDate();
+		shotmng_->AddBullet(name_, data_.pos, data_.dir);
+		Object::UpDate();
 }
 
 void Actor::DrawStatus()

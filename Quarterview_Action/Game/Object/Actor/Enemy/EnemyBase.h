@@ -20,11 +20,6 @@ class EnemyBase :
 	public Actor
 {
 public:
-	struct EnemyStatus
-	{
-		std::string name;
-		std::shared_ptr<EnemyBase> ptr;
-	};
 	EnemyBase();
 	EnemyBase(const shared_Field field,std::vector<std::string>modelList);
 	~EnemyBase();
@@ -32,11 +27,11 @@ public:
 	void Render(void);
 	void Spawner(EnemyType id);
 private:
-	int frame;
+	int frame;/*
 
 	std::shared_ptr<Enemy1> enemy1_;
 	std::shared_ptr<Enemy2> enemy2_;
-	std::list<EnemyStatus> enemyList_;
+	std::list<EnemyStatus> enemyList_;*/
 protected:
 };
 

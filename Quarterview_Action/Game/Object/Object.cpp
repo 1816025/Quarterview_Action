@@ -1,5 +1,6 @@
 #include "../Field.h"
 #include "Shot/ShotMng.h"
+#include "Actor/Actor.h"
 #include "Object.h"
 
 Object::Object()
@@ -47,6 +48,7 @@ void Object::UpDate(void)
 	{
 		shotmng_->UpDate(name_);
 	}
+	Collision();
 }
 
 void Object::Render()
@@ -54,6 +56,24 @@ void Object::Render()
 	if (field_->isBlock(data_.pos.x, data_.pos.y, data_.pos.z))
 	{
 		MV1DrawModel(id_);
+	}
+}
+
+void Object::Collision()
+{
+	auto TtoS = [=](const Actor& actor,const Object& obj)
+	{
+		return true;
+	};
+	if (name_ == "Player")
+	{
+		//Player‚ÆEnemy‚Ì’e
+		//TtoS(this->GetPos(), );
+	}
+	else
+	{
+		//Enemy‚ÆPlayer‚Ì’e
+		//TtoS(this->GetPos(), );
 	}
 }
 

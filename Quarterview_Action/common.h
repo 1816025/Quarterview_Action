@@ -37,7 +37,7 @@ enum class STATE
 	LANDING
 };
 
-std::vector<std::string> GetFileList(std::string directory);
+const void GetFileList(std::string directory);
 const std::vector<std::string> GetTextureList();
 const std::vector<std::string> GetModelList();
 const VECTOR operator+(const VECTOR& vec, const VECTOR& vec2);
