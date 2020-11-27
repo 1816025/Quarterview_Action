@@ -12,22 +12,22 @@ using shared_Field = std::shared_ptr<Field>;
 class EnemyBase;
 class Enemy1;
 class Enemy2;
-class Actor
-	:public Object
-{
-public:
 	struct EnemyStatus
 	{
 		std::string name;
 		std::shared_ptr<EnemyBase> ptr;
 	};
+class Actor
+	:public Object
+{
+public:
 	Actor();
-	~Actor();
+	Actor(const shared_Field field, std::vector<std::string>modelList);
+	virtual ~Actor();
 	bool Init(const int& id, const int& shadow,const Param& data);
 	virtual void Render(void);
 	virtual void Render(std::string name);
 	virtual void UpDate(void);
-
 private:
 	void DrawStatus();
 protected:

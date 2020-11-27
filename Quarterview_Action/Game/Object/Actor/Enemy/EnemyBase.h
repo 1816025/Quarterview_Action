@@ -22,10 +22,12 @@ class EnemyBase :
 public:
 	EnemyBase();
 	EnemyBase(const shared_Field field,std::vector<std::string>modelList);
-	~EnemyBase();
+	virtual ~EnemyBase();
 	void UpDate(void);
 	void Render(void);
 	void Spawner(EnemyType id);
+	void Killer(std::shared_ptr<EnemyBase> enemy);
+	const std::list<EnemyStatus> GetEnemyList(void);
 private:
 	int frame;/*
 

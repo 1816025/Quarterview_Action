@@ -5,6 +5,7 @@
 
 Enemy2::Enemy2()
 {
+	int a = 0;
 }
 
 Enemy2::Enemy2(const shared_Field field,const shared_ShotMng shotmng)

@@ -16,6 +16,7 @@ public:
 	std::shared_ptr<Block> GetMapData(const int& x,const int& y);
 	bool isBlock(const float& x,const float& y,const float& z);
 private:
+	void MakeMap(void);
 	void Render(void);
 	int block_id_ = -1;
 	std::map<std::string,int> textur_id_;

@@ -28,5 +28,6 @@ Enemy1::Enemy1(const shared_Field& field,const shared_ShotMng& shotmng)
 
 Enemy1::~Enemy1()
 {
+	int a = 0;
 }
 

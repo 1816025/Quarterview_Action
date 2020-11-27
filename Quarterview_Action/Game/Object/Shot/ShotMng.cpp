@@ -20,6 +20,7 @@ ShotMng::ShotMng(ShooterType type,int id, std::shared_ptr<Field> field)
 
 ShotMng::~ShotMng()
 {
+	int a = 0;
 }
 
 void ShotMng::AddBullet(const std::string name, const VECTOR& pos, const int& dir)
@@ -79,4 +80,9 @@ void ShotMng::Render(std::string name)
 			}
 		}
 	}
+}
+
+const std::list<ShotData> ShotMng::GetShotList(void)
+{
+	return shotList_;
 }

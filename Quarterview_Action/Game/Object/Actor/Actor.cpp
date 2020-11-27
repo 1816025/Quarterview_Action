@@ -10,6 +10,10 @@ Actor::Actor()
 {
 }
 
+Actor::Actor(const shared_Field field, std::vector<std::string> modelList)
+{
+}
+
 Actor::~Actor()
 {
 }

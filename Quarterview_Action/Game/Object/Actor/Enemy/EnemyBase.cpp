@@ -5,6 +5,7 @@
 
 EnemyBase::EnemyBase()
 {
+	enemyList_.clear();
 }
 
 EnemyBase::EnemyBase(const shared_Field field,std::vector<std::string> modelList)
@@ -14,7 +15,7 @@ EnemyBase::EnemyBase(const shared_Field field,std::vector<std::string> modelList
 	enemy1_  = std::make_shared<Enemy1>(field,shotmng_);
 	enemy2_  = std::make_shared<Enemy2>(field,shotmng_);
 	Spawner(EnemyType::Kiritan);
-	Spawner(EnemyType::Itako);;
+	Spawner(EnemyType::Itako);
 }
 
 EnemyBase::~EnemyBase()
@@ -56,4 +57,26 @@ void EnemyBase::Spawner(EnemyType id)
 		
 		break;
 	}
+}
+
+void EnemyBase::Killer(std::shared_ptr<EnemyBase> enemy)
+{
+	for (auto itr = enemyList_.begin(); itr != enemyList_.end();)
+	{
+		if (itr->ptr == enemy)
+		{
+			enemy->~EnemyBase();
+			itr = enemyList_.erase(itr);
+			break;
+		}
+		else
+		{
+			itr++;
+		}
+	}
+}
+
+const std::list<EnemyStatus> EnemyBase::GetEnemyList(void)
+{
+	return enemyList_;
 }

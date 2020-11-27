@@ -1,5 +1,6 @@
 #pragma once
 #include <mutex>
+#include <list>
 #include <string>
 #include "../../common.h"
 
@@ -20,6 +21,10 @@ public:
 	void UpDate(void);
 	void Render(void);
 	void Collision();
+	const std::shared_ptr<ShotMng> GetShotMng(void)
+	{
+		return shotmng_;
+	}
 protected:
 	std::string name_;
 

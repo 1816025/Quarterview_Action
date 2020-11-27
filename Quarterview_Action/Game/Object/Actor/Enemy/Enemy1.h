@@ -13,7 +13,7 @@ class Enemy1:
 public:
 	Enemy1();
 	Enemy1(const shared_Field& field, const shared_ShotMng& shotmng);
-	~Enemy1();
+	virtual ~Enemy1();
 	//virtual void UpDate();
 };
 
