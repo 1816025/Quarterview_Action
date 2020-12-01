@@ -26,12 +26,13 @@ public:
 	virtual ~Actor();
 	bool Init(const int& id, const int& shadow,const Param& data);
 	virtual void Render(void);
-	virtual void Render(std::string name);
 	virtual void UpDate(void);
+	void KnockBack(void);
 private:
 	void DrawStatus();
 protected:
 	void Animation(int no);
+	virtual void Render(std::string name);
 
 	std::shared_ptr<Enemy1> enemy1_;
 	std::shared_ptr<Enemy2> enemy2_;

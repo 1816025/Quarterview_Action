@@ -29,11 +29,6 @@ public:
 	void Killer(std::shared_ptr<EnemyBase> enemy);
 	const std::list<EnemyStatus> GetEnemyList(void);
 private:
-	int frame;/*
-
-	std::shared_ptr<Enemy1> enemy1_;
-	std::shared_ptr<Enemy2> enemy2_;
-	std::list<EnemyStatus> enemyList_;*/
-protected:
+	int frame_;
 };
 

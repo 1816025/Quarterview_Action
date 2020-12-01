@@ -14,7 +14,6 @@ public:
 	~GameScene();
 
 	void Run(void);
-	void UpDate(void);
 	void Render(void);
 private:
 

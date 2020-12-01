@@ -18,8 +18,8 @@ public:
 private:
 	void MakeMap(void);
 	void Render(void);
-	int block_id_ = -1;
-	std::map<std::string,int> textur_id_;
+	int blockId_ = -1;
+	std::map<std::string,int> texturId_;
 	Map_Data map_data_;
 	std::vector<std::shared_ptr<Block>> block_;
 };

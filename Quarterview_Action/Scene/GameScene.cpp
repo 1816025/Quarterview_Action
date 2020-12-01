@@ -45,15 +45,14 @@ void GameScene::Run()
 	{
 		if (collision_->SvsS(player_->GetPos(), 15, enemy.ptr->GetPos(), 15))
 		{
-			//TRACE(enemy.name.c_str());
+
 		}
 		if (collision_->TvsS(player_->GetPos(), 15, enemy.ptr->GetShotMng(), 50))
 		{
-			//TRACE((enemy.name+"hit\n").c_str());
+
 		}
 		if (collision_->TvsS(enemy.ptr->GetPos(), 15, player_->GetShotMng(), 100))
 		{
-			TRACE((enemy.name + "hit\n").c_str());
 			enemy_->Killer(enemy.ptr);
 		}
 	}

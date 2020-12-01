@@ -19,22 +19,7 @@ void Object::UpDate(void)
 		play_time_ = 0.0f;
 	}
 
-	jump_force_ += gravity_;
-	data_.pos.y -= jump_force_;
-	if (field_->isBlock(data_.pos.x, data_.pos.y, data_.pos.z) && state_ != STATE::FALL)
-	{
-		if (data_.pos.y <= 0)
-		{
-			state_ = STATE::LANDING;
-			jump_force_ = 0;
-			data_.pos.y = 0.0f;
-		}
-	}
-
-	if (data_.pos.y < 0)
-	{
-		state_ = STATE::FALL;
-	}
+	SwitchGravity();
 
 	data_.rol = VGet(data_.rol.x, ((DX_PI_F / 180) * ((data_.dir * 45) - 90)), data_.rol.z);
 	MV1SetRotationXYZ(data_.id, data_.rol);
@@ -49,6 +34,27 @@ void Object::UpDate(void)
 		shotmng_->UpDate(name_);
 	}
 	Collision();
+}
+
+void Object::SwitchGravity(void)
+{
+	jump_force_ += gravity_;
+	data_.pos.y -= jump_force_;
+
+	if (field_->isBlock(data_.pos.x, data_.pos.y, data_.pos.z) && state_ != STATE::FALL)
+	{
+		if (data_.pos.y <= 0)
+		{
+			state_ = STATE::LANDING;
+			jump_force_ = 0;
+			data_.pos.y = 0.0f;
+		}
+	}
+
+	if (data_.pos.y < 0)
+	{
+		state_ = STATE::FALL;
+	}
 }
 
 void Object::Render()

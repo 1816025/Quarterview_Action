@@ -9,12 +9,13 @@ public:
 	void UpDate(void);
 	void Render(void);
 	const bool IsRemove(void);
+	bool SetRemove(bool flag);
 private:
 	float rol;
 protected:
 	/*true: remove‚Å‚«‚é false: remove‚Å‚«‚È‚¢*/
-	float Range;
-	bool _is_remove;
-	ShadowParam shadow_data_;
+	float Range_;
+	bool isRemove_;
+	ShadowParam shadowData_;
 };
 

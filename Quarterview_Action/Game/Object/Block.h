@@ -7,7 +7,7 @@ public:
 	~Block();
 	void Render(void);
 private:
-	int _id;
-	VECTOR _pos;
-	VECTOR _offset;
+	int id_;
+	VECTOR pos_;
+	VECTOR offset_;
 };

@@ -33,7 +33,7 @@ public:
 	const std::list<ShotData> GetShotList(void);
 private:
 	ShadowParam shadow_;
-	std::map<std::string,int> interval;
+	std::map<std::string,int> interval_;
 	ShooterType type_;
 	std::list<ShotData> shotList_;
 };

@@ -19,6 +19,7 @@ public:
 	}
 
 	void UpDate(void);
+	void SwitchGravity();
 	void Render(void);
 	void Collision();
 	const std::shared_ptr<ShotMng> GetShotMng(void)

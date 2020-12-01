@@ -25,16 +25,17 @@ ShotMng::~ShotMng()
 
 void ShotMng::AddBullet(const std::string name, const VECTOR& pos, const int& dir)
 {
-	interval[name]++;
-	if (interval[name] % 2 == 0)
+	auto a = name;
+	interval_[name]++;
+	if (interval_[name] % 10 == 0)
 	{
-		interval[name] = 0;
+		interval_[name] = 0;
 		data_.pos = VGet(pos.x,pos.y +80.0f,pos.z);
 
 		switch (type_)
 		{
 		case ShooterType::PLAYER:
-			shotList_.push_front(ShotData{ name,new Shot(pos, dir,data_,shadow_, field_) });
+			shotList_.push_front(ShotData{ name,new Shot(data_.pos, dir,data_,shadow_, field_) });
 			break;
 		case ShooterType::ENEMY:
 			shotList_.push_front(ShotData{ name, new EnemyShot(pos, dir, data_, shadow_, field_)});

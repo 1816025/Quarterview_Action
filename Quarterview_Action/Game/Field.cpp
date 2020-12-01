@@ -10,15 +10,15 @@
 
 Field::Field(std::vector<std::string>file_name)
 {
-	if (block_id_ == -1)
+	if (blockId_ == -1)
 	{
 		//auto file_name = GetFileList("model");
 
 		for (auto name : file_name)
 		{
-			textur_id_.try_emplace(name, MV1LoadTexture(("model/block/texture/" + name).c_str()));
+			texturId_.try_emplace(name, MV1LoadTexture(("model/block/texture/" + name).c_str()));
 		}
-		block_id_ = MV1LoadModel("model/block/block.mv1");
+		blockId_ = MV1LoadModel("model/block/block.mv1");
 	}
 	MakeMap();
 }
@@ -63,11 +63,11 @@ void Field::MakeMap(void)
 		{
 			if (engine() % 2)
 			{
-				map_data_[x][z] = std::make_shared<Block>(block_id_, textur_id_["block01.png"], VGet(x, 0, z));
+				map_data_[x][z] = std::make_shared<Block>(blockId_, texturId_["block01.png"], VGet(x, 0, z));
 			}
 			else
 			{
-				map_data_[x][z] = std::make_shared<Block>(block_id_, textur_id_["kusa01.png"], VGet(x, 0, z));
+				map_data_[x][z] = std::make_shared<Block>(blockId_, texturId_["kusa01.png"], VGet(x, 0, z));
 			}
 			nullcnt++;
 		}

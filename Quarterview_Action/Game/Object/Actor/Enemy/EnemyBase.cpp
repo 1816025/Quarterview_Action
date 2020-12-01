@@ -65,7 +65,6 @@ void EnemyBase::Killer(std::shared_ptr<EnemyBase> enemy)
 	{
 		if (itr->ptr == enemy)
 		{
-			enemy->~EnemyBase();
 			itr = enemyList_.erase(itr);
 			break;
 		}

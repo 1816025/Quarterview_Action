@@ -11,13 +11,13 @@ public:
 	void UpDate();
 private:
 	/*カメラ座標*/
-	VECTOR _camera_pos;
+	VECTOR cameraPos_;
 	/*焦点座標*/
-	VECTOR _target_pos;
+	VECTOR targetPos_;
 	/*カメラ上方向*/
-	VECTOR _camera_up_vec;
+	VECTOR cameraUpVec_;
 
-	VECTOR _camera_offset;
+	VECTOR cameraOffset_;
 
 	shared_Player player_;
 };
