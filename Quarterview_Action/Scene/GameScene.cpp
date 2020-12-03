@@ -1,10 +1,6 @@
-#include <DxLib.h>
-#include "../_debug/_DebugConOut.h"
-#include "../common.h"
 #include "../Collision.hpp"
 
 #include "../Camera.h"
-#include "../Game/Field.h"
 #include "../Game/Object/Object.h"
 #include "../Game/Object/Sky.h"
 #include "../Game/Object/Shot/ShotMng.h"
@@ -12,31 +8,31 @@
 #include "../Game/Object/Actor/Player.h"
 #include "../Game/Object/Actor/Enemy/EnemyBase.h"
 
+#include "ResultScene.h"
 #include "GameScene.h"
 
 GameScene::GameScene()
 {
 	TRACE("GameScene\n");
 	GetFileList("model");
-	if (!field_)
-	{
-		field_ = std::make_shared<Field>(GetTextureList());
-		sky_ = std::make_shared<Sky>();
-		enemy_ = std::make_shared<EnemyBase>(field_,GetModelList());
-		player_ = std::make_shared<Player>(field_);
-		camera_ = std::make_shared<Camera>(player_);
-	}
-	collision_ = std::make_unique<Collision>();
+	Init();
+}
+
+GameScene::GameScene(std::shared_ptr<Field> field)
+{
+	TRACE("GameScene\n");
+	field_ = field;
+	Init();
 }
 
 GameScene::~GameScene()
 {
+	int a = 0;
 }
 
-void GameScene::Run()
+unique_base GameScene::Run(unique_base own)
 {
 	camera_->UpDate();
-	field_->UpDate();
 	player_->UpDate();
 	enemy_->UpDate();
 
@@ -45,11 +41,10 @@ void GameScene::Run()
 	{
 		if (collision_->SvsS(player_->GetPos(), 15, enemy.ptr->GetPos(), 15))
 		{
-
 		}
 		if (collision_->TvsS(player_->GetPos(), 15, enemy.ptr->GetShotMng(), 50))
 		{
-
+			return std::move(std::make_unique<ResultScene>(false));
 		}
 		if (collision_->TvsS(enemy.ptr->GetPos(), 15, player_->GetShotMng(), 100))
 		{
@@ -58,11 +53,26 @@ void GameScene::Run()
 	}
 
 	Render();
+	return std::move(own);
 }
 
 void GameScene::Render(void)
 {
 	sky_->Render();
 	player_->Render();
+	field_->Render();
 	enemy_->Render();
+}
+
+void GameScene::Init()
+{
+	if (field_ != nullptr)
+	{
+		sky_ = std::make_shared<Sky>();
+		enemy_ = std::make_shared<EnemyBase>(field_, GetModelList());
+		player_ = std::make_shared<Player>(field_);
+		camera_ = std::make_shared<Camera>(player_);
+	}
+	collision_ = std::make_unique<Collision>();
+	finalFlag_ = false;
 }

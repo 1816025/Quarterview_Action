@@ -14,7 +14,7 @@ Player::Player(const shared_Field field)
 		id,
 		6,
 		0.0f,
-		VGet(50.0f,0.0f,50.0f),
+		VGet(100.0f,0.0f,50.0f),
 		VGet((DX_PI_F / 180 * -90),((DX_PI_F / 180) * ((6 * 45) - 90)),0.0f),
 		VGet(1.0f,1.0f,1.0f)
 	};

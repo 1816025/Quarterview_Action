@@ -30,7 +30,7 @@ void ShotMng::AddBullet(const std::string name, const VECTOR& pos, const int& di
 	if (interval_[name] % 10 == 0)
 	{
 		interval_[name] = 0;
-		data_.pos = VGet(pos.x,pos.y +80.0f,pos.z);
+		data_.pos = VGet(pos.x,pos.y +40.0f,pos.z);
 
 		switch (type_)
 		{
@@ -54,7 +54,7 @@ void ShotMng::UpDate(std::string name)
 		{
 			if ((*itr).unitName == name)
 			{
-				(*itr).shot->UpDate();
+				(*itr).shot->UpDate(field_);
 			}
 			if ((*itr).shot->IsRemove())
 			{

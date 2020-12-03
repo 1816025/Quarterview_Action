@@ -7,7 +7,7 @@ Shot::Shot(const VECTOR& pos, int dir,Param param,ShadowParam shadow,std::shared
 {
 	ShotBase::field_ = field;
 
-	data_.pos = VGet(pos.x, pos.y,pos.z);
+	data_.pos = VGet(pos.x, pos.y + 40.0f,pos.z);
 	data_.dir = dir;
 	data_.speed = 20.0f;
 

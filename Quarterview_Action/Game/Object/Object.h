@@ -19,7 +19,6 @@ public:
 	}
 
 	void UpDate(void);
-	void SwitchGravity();
 	void Render(void);
 	void Collision();
 	const std::shared_ptr<ShotMng> GetShotMng(void)
@@ -27,6 +26,7 @@ public:
 		return shotmng_;
 	}
 protected:
+	void SwitchGravity();
 	std::string name_;
 
 	Param data_;

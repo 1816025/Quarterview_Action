@@ -5,6 +5,7 @@
 
 Object::Object()
 {
+	gravity_ = 0.25f;
 }
 
 Object::~Object()

@@ -2,16 +2,12 @@
 
 #include "common.h"
 
-#include "Scene/GameScene.h"
+#include "Scene/SceneBase.h"
+#include "Scene/TitleScene.h"
 #include "Application.h"
 
 Application::~Application()
 {
-	if (_game != nullptr)
-	{
-		delete _game;
-		_game = nullptr;
-	}
 }
 
 bool Application::SysInit(void)
@@ -29,19 +25,16 @@ bool Application::SysInit(void)
 	SetUseBackCulling(true);	//バックカリングの有効化
 	SetUseLighting(false);		//ライティングの無効化
 	SetBackgroundColor(0, 0, 0);
-	if (_game == nullptr)
-	{
-		_game = new GameScene();
-	}
 
 	return true;
 }
 
 void Application::Run(void)
 {
+	unique_base scene = std::make_unique<TitleScene>();
 	while (ProcessMessage() != -1) {
 		ClearDrawScreen();
-		_game->Run();
+		scene = scene->Run(move(scene));
 		ScreenFlip();
 	}
 }

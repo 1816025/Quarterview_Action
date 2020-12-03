@@ -32,12 +32,6 @@ bool Field::Init(void)
 	return true;
 }
 
-void Field::UpDate(void)
-{
-	
-	Render();
-}
-
 std::shared_ptr<Block> Field::GetMapData(const int& x, const int& z)
 {
 	return map_data_[x][z];

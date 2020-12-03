@@ -1,6 +1,6 @@
 #pragma once
 
-class GameScene;
+class SceneBase;
 
 class Application
 {
@@ -13,9 +13,5 @@ public:
 	void Run(void);
 	//終了時処理
 	void ShutDown(void);
-
-private:
-	//GameSceneのポインタ
-	GameScene* _game = nullptr;
 };
 

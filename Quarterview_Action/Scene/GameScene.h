@@ -1,5 +1,5 @@
 #pragma once
-#include <mutex>
+#include "SceneBase.h"
 
 class Field;
 class Camera;
@@ -7,23 +7,23 @@ class Player;
 class EnemyBase;
 class Collision;
 class Sky;
-class GameScene
+class GameScene:
+	public SceneBase
 {
 public:
 	GameScene();
+	GameScene(std::shared_ptr<Field> field);
 	~GameScene();
-
-	void Run(void);
+	unique_base Run(unique_base own);
 	void Render(void);
+	void Init();
 private:
-
-	//Fieldのポインタ
-	std::shared_ptr<Field> field_;
 	//Cameraのポインタ
 	std::shared_ptr<Camera> camera_;
 	std::shared_ptr<Player> player_;
 	std::shared_ptr<EnemyBase> enemy_;
 	std::shared_ptr<Sky> sky_;
 	std::unique_ptr<Collision> collision_;
+protected:
 };
 

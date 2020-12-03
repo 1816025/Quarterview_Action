@@ -6,7 +6,7 @@ class ShotBase
 public:
 	ShotBase();
 	~ShotBase();
-	void UpDate(void);
+	void UpDate(std::shared_ptr<Field> field);
 	void Render(void);
 	const bool IsRemove(void);
 	bool SetRemove(bool flag);
