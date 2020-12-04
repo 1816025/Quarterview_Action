@@ -10,6 +10,7 @@
 
 Field::Field(std::vector<std::string>file_name)
 {
+	engine.seed(seed_gen());
 	if (blockId_ == -1)
 	{
 		//auto file_name = GetFileList("model");
@@ -34,7 +35,7 @@ bool Field::Init(void)
 
 std::shared_ptr<Block> Field::GetMapData(const int& x, const int& z)
 {
-	return map_data_[x][z];
+	return mapData_[x][z];
 }
 
 bool Field::isBlock(const float& pos_x, const float& pos_y, const float& pos_z)
@@ -42,40 +43,54 @@ bool Field::isBlock(const float& pos_x, const float& pos_y, const float& pos_z)
 	auto x = pos_x / 100;
 	auto z = pos_z / 100;
 	auto result = (x>=0 && x < FIELD_SIZE_X && z >= 0 && z <   FIELD_SIZE_Z);
-	return (result ? ((map_data_[x][z] == nullptr) ? false : true) : false);
+	return (result ? ((mapData_[x][z] == nullptr) ? false : true) : false);
 }
 
 void Field::MakeMap(void)
 {
-	std::default_random_engine engine;
-	std::random_device seed_gen;
-	engine.seed(seed_gen());
-	int nullcnt = 0;
-	auto Make = [=](int x, int z, std::default_random_engine& engine, int& nullcnt)
+	for (int z = 0; z < FIELD_SIZE_Z; z++)
+	{
+		for (int x = 0; x < FIELD_SIZE_X; x++)
+		{
+			if (engine() % 10 < 8)
+			{
+				if (engine() % 2)
+				{
+					mapData_[x].emplace_back(std::make_shared<Block>(blockId_, texturId_["block01.png"], VGet(x, 0, z)));
+				}
+				else
+				{
+					mapData_[x].emplace_back(std::make_shared<Block>(blockId_, texturId_["TNT.png"], VGet(x, 0, z)));
+				}
+			}
+			else
+			{
+				mapData_[x].emplace_back(nullptr);
+			}
+		}
+	}
+	demoMapData_ = mapData_;
+}
+
+void Field::AddDemoMap(void)
+{
+	for (int x = 0; x < FIELD_SIZE_X; x++)
 	{
 		if (engine() % 10 < 8)
 		{
 			if (engine() % 2)
 			{
-				map_data_[x][z] = std::make_shared<Block>(blockId_, texturId_["block01.png"], VGet(x, 0, z));
+				mapData_[x].emplace_back(std::make_shared<Block>(blockId_, texturId_["block01.png"], VGet(x, 0, mapData_[x].size())));
 			}
 			else
 			{
-				map_data_[x][z] = std::make_shared<Block>(blockId_, texturId_["kusa01.png"], VGet(x, 0, z));
+				mapData_[x].emplace_back(std::make_shared<Block>(blockId_, texturId_["TNT.png"], VGet(x, 0, mapData_[x].size())));
 			}
-			nullcnt++;
 		}
-	};
-	for (int z = 0; z < FIELD_SIZE_Z; z++)
-	{
-		for (int x = 0; x < FIELD_SIZE_X; x++)
+		else
 		{
-			Make(x, z, engine, nullcnt);
+			mapData_[x].emplace_back(nullptr);
 		}
-	}
-	if (nullcnt == 0)
-	{
-		MakeMap();
 	}
 }
 
@@ -96,14 +111,46 @@ void Field::Render(void)
 		DrawLine3D(start_pos, end_pos, 0xffffff);
 	}
 
-	for (int z = 0; z < FIELD_SIZE_Z; z++)
+	for (int z = 0; z < mapData_[0].size(); z++)
 	{
 		for (int x = 0; x < FIELD_SIZE_X; x++)
 		{
-			if (map_data_[x][z] != nullptr)
+			if (mapData_[x][z] != nullptr)
 			{
+				mapData_[x][z]->Render();
+			}
+			else
+			{
+				int a = 0;
+			}
+		}
+	}
+}
 
-				map_data_[x][z]->Render();
+void Field::DemoRender(void)
+{
+	VECTOR start_pos;
+	VECTOR end_pos;
+	for (int line = 0; line <= FIELD_SIZE_X; ++line)
+	{
+		start_pos = VGet(line * 100.0f, 0.0f, 0.0f);
+		end_pos = VGet(line * 100.0f, 0.0f, FIELD_SIZE_Z * 100.0f);
+		DrawLine3D(start_pos, end_pos, 0xffffff);
+	}
+	for (int line = 0; line <= FIELD_SIZE_Z; ++line)
+	{
+		start_pos = VGet(0.0f, 0.0f, line * 100.0f);
+		end_pos = VGet(FIELD_SIZE_X * 100.0f, 0.0f, line * 100.0f);
+		DrawLine3D(start_pos, end_pos, 0xffffff);
+	}
+
+	for (int z = 0; z < demoMapData_[0].size(); z++)
+	{
+		for (int x = 0; x < FIELD_SIZE_X; x++)
+		{
+			if (demoMapData_[x][z] != nullptr)
+			{
+				demoMapData_[x][z]->Render();
 			}
 			else
 			{

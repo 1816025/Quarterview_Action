@@ -34,11 +34,14 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Input\Mouse.cpp" />
     <ClCompile Include="Game\Object\Object.cpp" />
+    <ClCompile Include="Scene\ResultScene.cpp" />
+    <ClCompile Include="Scene\SceneBase.cpp" />
     <ClCompile Include="Scene\GameScene.cpp" />
     <ClCompile Include="Game\Object\Shot\Shot.cpp" />
     <ClCompile Include="Game\Object\Shot\ShotMng.cpp" />
     <ClCompile Include="Game\Object\Shot\ShotBase.cpp" />
     <ClCompile Include="Game\Object\Sky.cpp" />
+    <ClCompile Include="Scene\TitleScene.cpp" />
     <ClCompile Include="_debug\_DebugConOut.cpp" />
     <ClCompile Include="_debug\_DebugDispOut.cpp" />
   </ItemGroup>
@@ -58,11 +61,14 @@
     <ClInclude Include="Input\KeyBoard.h" />
     <ClInclude Include="Input\Mouse.h" />
     <ClInclude Include="Game\Object\Object.h" />
+    <ClInclude Include="Scene\ResultScene.h" />
+    <ClInclude Include="Scene\SceneBase.h" />
     <ClInclude Include="Scene\GameScene.h" />
     <ClInclude Include="Game\Object\Shot\Shot.h" />
     <ClInclude Include="Game\Object\Shot\ShotMng.h" />
     <ClInclude Include="Game\Object\Shot\ShotBase.h" />
     <ClInclude Include="Game\Object\Sky.h" />
+    <ClInclude Include="Scene\TitleScene.h" />
     <ClInclude Include="_debug\_DebugConOut.h" />
     <ClInclude Include="_debug\_DebugDispOut.h" />
   </ItemGroup>

@@ -7,6 +7,14 @@
 #include "Game/Object/Actor/Actor.h"
 #include "Camera.h"
 
+Camera::Camera()
+{
+	cameraPos_ = VGet(0,50,-750);
+	cameraOffset_ = VGet(0.0f, 0.0f, 0.0f);
+	targetPos_ = VGet(0.0f,0, 0);
+	cameraUpVec_ = VGet(0.0f, 1.0f, 0.0f);
+}
+
 Camera::Camera(const shared_Player player)
 {
 	player_ = player;
@@ -24,10 +32,10 @@ void Camera::UpDate()
 {
 	lpKeyBoard.UpDate();
 
-	//_camera_offset.z += ((lpKeyBoard.GetKeyTrigger(KEY_INPUT_UP)	|| lpKeyBoard.GetKeyTrigger(KEY_INPUT_W)) ? 100.0f : 0.0f);
-	//_camera_offset.x -= ((lpKeyBoard.GetKeyTrigger(KEY_INPUT_LEFT)	|| lpKeyBoard.GetKeyTrigger(KEY_INPUT_A)) ? 100.0f : 0.0f);
-	//_camera_offset.z -= ((lpKeyBoard.GetKeyTrigger(KEY_INPUT_DOWN)	|| lpKeyBoard.GetKeyTrigger(KEY_INPUT_S)) ? 100.0f : 0.0f);
-	//_camera_offset.x += ((lpKeyBoard.GetKeyTrigger(KEY_INPUT_RIGHT) || lpKeyBoard.GetKeyTrigger(KEY_INPUT_D)) ? 100.0f : 0.0f);
+	//cameraOffset_.z += ((lpKeyBoard.GetKeyTrigger(KEY_INPUT_UP)	|| lpKeyBoard.GetKeyTrigger(KEY_INPUT_W)) ? 100.0f : 0.0f);
+	//cameraOffset_.x -= ((lpKeyBoard.GetKeyTrigger(KEY_INPUT_LEFT)	|| lpKeyBoard.GetKeyTrigger(KEY_INPUT_A)) ? 100.0f : 0.0f);
+	//cameraOffset_.z -= ((lpKeyBoard.GetKeyTrigger(KEY_INPUT_DOWN)	|| lpKeyBoard.GetKeyTrigger(KEY_INPUT_S)) ? 100.0f : 0.0f);
+	//cameraOffset_.x += ((lpKeyBoard.GetKeyTrigger(KEY_INPUT_RIGHT) || lpKeyBoard.GetKeyTrigger(KEY_INPUT_D)) ? 100.0f : 0.0f);
 	//
 	VECTOR target_pos = player_->GetPos();
 	VECTOR cam_pos = cameraPos_ + target_pos;
@@ -40,4 +48,16 @@ void Camera::UpDate()
 	SetCameraScreenCenter(SCREEN_SIZE_X / 3, SCREEN_SIZE_Y / 3 * 2);
 	SetupCamera_Ortho(1400.0f);
 	SetCameraPositionAndTargetAndUpVec(cam_pos, target_pos, cameraUpVec_);
+}
+
+void Camera::DemoUpDate()
+{
+	cameraOffset_.z += ((lpKeyBoard.GetKeyTrigger(KEY_INPUT_UP)	|| lpKeyBoard.GetKeyTrigger(KEY_INPUT_W)) ? 100.0f : 0.0f);
+	cameraOffset_.x -= ((lpKeyBoard.GetKeyTrigger(KEY_INPUT_LEFT)	|| lpKeyBoard.GetKeyTrigger(KEY_INPUT_A)) ? 100.0f : 0.0f);
+	cameraOffset_.z -= ((lpKeyBoard.GetKeyTrigger(KEY_INPUT_DOWN)	|| lpKeyBoard.GetKeyTrigger(KEY_INPUT_S)) ? 100.0f : 0.0f);
+	cameraOffset_.x += ((lpKeyBoard.GetKeyTrigger(KEY_INPUT_RIGHT) || lpKeyBoard.GetKeyTrigger(KEY_INPUT_D)) ? 100.0f : 0.0f);
+	
+	SetCameraScreenCenter(0, SCREEN_SIZE_Y);
+	//SetupCamera_Ortho(700.0f);
+	SetCameraPositionAndTargetAndUpVec(cameraPos_ + cameraOffset_,targetPos_, cameraUpVec_);
 }

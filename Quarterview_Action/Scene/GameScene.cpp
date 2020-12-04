@@ -51,8 +51,6 @@ unique_base GameScene::Run(unique_base own)
 			enemy_->Killer(enemy.ptr);
 		}
 	}
-
-	Render();
 	return std::move(own);
 }
 

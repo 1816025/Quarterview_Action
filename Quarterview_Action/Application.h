@@ -11,6 +11,7 @@ public:
 	bool SysInit(void);
 	//ゲームループ
 	void Run(void);
+	bool isShutDown(void);
 	//終了時処理
 	void ShutDown(void);
 };

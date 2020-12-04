@@ -25,3 +25,7 @@ unique_base ResultScene::Run(unique_base own)
 	}
 	return std::move(own);
 }
+
+void ResultScene::Render(void)
+{
+}

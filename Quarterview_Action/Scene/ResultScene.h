@@ -8,6 +8,7 @@ public:
 	ResultScene(bool alive);
 	~ResultScene();
 	unique_base Run(unique_base own);
+	void Render(void);
 private:
 	bool aliveFlag;
 };

@@ -32,11 +32,29 @@ bool Application::SysInit(void)
 void Application::Run(void)
 {
 	unique_base scene = std::make_unique<TitleScene>();
-	while (ProcessMessage() != -1) {
+
+	while (ProcessMessage() != -1 && !isShutDown())
+	{
 		ClearDrawScreen();
 		scene = scene->Run(move(scene));
+		scene->Render();
 		ScreenFlip();
 	}
+}
+
+bool Application::isShutDown(void)
+{
+	std::string pass;
+	if (CheckHitKey(KEY_INPUT_ESCAPE))
+	{
+		char password[16] = "\0";
+		DrawBox(0, SCREEN_SIZE_Y - 32, 16 * 16, SCREEN_SIZE_Y, 0x00, true);
+		DrawString(0, SCREEN_SIZE_Y - 32, "password: ", 0xffffff);
+		KeyInputString(0, SCREEN_SIZE_Y - 16, 16, password, false);
+		pass = password;
+	}
+	//éwíËÇ≥ÇÍÇΩpasswordÇ∆ìØÇ∂Ç≈Ç†ÇÍÇŒèIóπÇ∑ÇÈ
+	return (pass == "yumeusagi" ? true : false);
 }
 
 void Application::ShutDown(void)

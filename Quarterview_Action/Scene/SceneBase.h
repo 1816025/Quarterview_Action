@@ -14,6 +14,7 @@ public:
 	SceneBase();
 	~SceneBase();
 	virtual unique_base Run(unique_base own) = 0;
+	virtual void Render(void) = 0;
 	bool finalFlag_;
 protected:
 	//Field‚Ìƒ|ƒCƒ“ƒ^
