@@ -31,3 +31,9 @@ Enemy1::~Enemy1()
 	int a = 0;
 }
 
+void Enemy1::UpDate(void)
+{
+	shotmng_->AddBullet(name_, data_.pos, data_.dir);
+	Actor::UpDate();
+}
+

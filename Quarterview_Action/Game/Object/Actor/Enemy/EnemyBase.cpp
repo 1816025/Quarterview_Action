@@ -26,7 +26,7 @@ void EnemyBase::UpDate(void)
 {
 	for (auto enemy : enemyList_)
 	{
-		enemy.ptr->Actor::UpDate();
+		enemy.ptr->UpDate();
 	}
 }
 

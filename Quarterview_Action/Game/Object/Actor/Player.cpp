@@ -30,40 +30,40 @@ Player::~Player()
 {
 }
 
-void Player::UpDate()
+void Player::UpDate(std::unique_ptr<KeyBoard>& keyboad)
 {
 	lpMouse.UpDate();
 	Object::UpDate();
-	data_.dir = ((lpKeyBoard.GetKeyHold(KEY_INPUT_UP) || lpKeyBoard.GetKeyHold(KEY_INPUT_W)) ? 6 : data_.dir);
-	data_.dir = ((lpKeyBoard.GetKeyHold(KEY_INPUT_LEFT) || lpKeyBoard.GetKeyHold(KEY_INPUT_A)) ? 4 : data_.dir);
-	data_.dir = ((lpKeyBoard.GetKeyHold(KEY_INPUT_DOWN) || lpKeyBoard.GetKeyHold(KEY_INPUT_S)) ? 2 : data_.dir);
-	data_.dir = ((lpKeyBoard.GetKeyHold(KEY_INPUT_RIGHT) || lpKeyBoard.GetKeyHold(KEY_INPUT_D)) ? 0 : data_.dir);
+	data_.dir = ((keyboad->GetKeyHold(KEY_INPUT_UP) || keyboad->GetKeyHold(KEY_INPUT_W)) ? 6 : data_.dir);
+	data_.dir = ((keyboad->GetKeyHold(KEY_INPUT_LEFT) || keyboad->GetKeyHold(KEY_INPUT_A)) ? 4 : data_.dir);
+	data_.dir = ((keyboad->GetKeyHold(KEY_INPUT_DOWN) || keyboad->GetKeyHold(KEY_INPUT_S)) ? 2 : data_.dir);
+	data_.dir = ((keyboad->GetKeyHold(KEY_INPUT_RIGHT) || keyboad->GetKeyHold(KEY_INPUT_D)) ? 0 : data_.dir);
 	
-	if ((lpKeyBoard.GetKeyHold(KEY_INPUT_UP) || lpKeyBoard.GetKeyHold(KEY_INPUT_W))
-		&& (lpKeyBoard.GetKeyHold(KEY_INPUT_RIGHT) || lpKeyBoard.GetKeyHold(KEY_INPUT_D)))
+	if ((keyboad->GetKeyHold(KEY_INPUT_UP) || keyboad->GetKeyHold(KEY_INPUT_W))
+		&& (keyboad->GetKeyHold(KEY_INPUT_RIGHT) || keyboad->GetKeyHold(KEY_INPUT_D)))
 	{
 		data_.dir = 7;
 	}
-	else if ((lpKeyBoard.GetKeyHold(KEY_INPUT_UP) || lpKeyBoard.GetKeyHold(KEY_INPUT_W))
-		&& (lpKeyBoard.GetKeyHold(KEY_INPUT_LEFT) || lpKeyBoard.GetKeyHold(KEY_INPUT_A)))
+	else if ((keyboad->GetKeyHold(KEY_INPUT_UP) || keyboad->GetKeyHold(KEY_INPUT_W))
+		&& (keyboad->GetKeyHold(KEY_INPUT_LEFT) || keyboad->GetKeyHold(KEY_INPUT_A)))
 	{
 		data_.dir = 5;
 	}
-	else if ((lpKeyBoard.GetKeyHold(KEY_INPUT_DOWN) || lpKeyBoard.GetKeyHold(KEY_INPUT_S))
-			&& (lpKeyBoard.GetKeyHold(KEY_INPUT_LEFT) || lpKeyBoard.GetKeyHold(KEY_INPUT_A)))
+	else if ((keyboad->GetKeyHold(KEY_INPUT_DOWN) || keyboad->GetKeyHold(KEY_INPUT_S))
+			&& (keyboad->GetKeyHold(KEY_INPUT_LEFT) || keyboad->GetKeyHold(KEY_INPUT_A)))
 	{
 		data_.dir = 3;
 	}
-	else if (lpKeyBoard.GetKeyHold(KEY_INPUT_DOWN) || lpKeyBoard.GetKeyHold(KEY_INPUT_S)
-		&& (lpKeyBoard.GetKeyHold(KEY_INPUT_RIGHT) || lpKeyBoard.GetKeyHold(KEY_INPUT_D)))
+	else if (keyboad->GetKeyHold(KEY_INPUT_DOWN) || keyboad->GetKeyHold(KEY_INPUT_S)
+		&& (keyboad->GetKeyHold(KEY_INPUT_RIGHT) || keyboad->GetKeyHold(KEY_INPUT_D)))
 	{
 		data_.dir = 1;
 	}
 
-	if ((lpKeyBoard.GetKeyHold(KEY_INPUT_UP) || lpKeyBoard.GetKeyHold(KEY_INPUT_W))
-		|| (lpKeyBoard.GetKeyHold(KEY_INPUT_LEFT) || lpKeyBoard.GetKeyHold(KEY_INPUT_A))
-		|| (lpKeyBoard.GetKeyHold(KEY_INPUT_DOWN) || lpKeyBoard.GetKeyHold(KEY_INPUT_S))
-		|| (lpKeyBoard.GetKeyHold(KEY_INPUT_RIGHT) || lpKeyBoard.GetKeyHold(KEY_INPUT_D)))
+	if ((keyboad->GetKeyHold(KEY_INPUT_UP) || keyboad->GetKeyHold(KEY_INPUT_W))
+		|| (keyboad->GetKeyHold(KEY_INPUT_LEFT) || keyboad->GetKeyHold(KEY_INPUT_A))
+		|| (keyboad->GetKeyHold(KEY_INPUT_DOWN) || keyboad->GetKeyHold(KEY_INPUT_S))
+		|| (keyboad->GetKeyHold(KEY_INPUT_RIGHT) || keyboad->GetKeyHold(KEY_INPUT_D)))
 	{
 		auto npos_x = data_.pos.x - std::sin(data_.rol.y) * 5.0;
 		auto npos_z = data_.pos.z - std::cos(data_.rol.y) * 5.0;
@@ -94,7 +94,7 @@ void Player::UpDate()
 			Animation(anim_no_);
 		}
 	}
-	if (lpKeyBoard.GetKeyTrigger(KEY_INPUT_SPACE) && state_ == STATE::LANDING)
+	if (keyboad->GetKeyTrigger(KEY_INPUT_SPACE) && state_ == STATE::LANDING)
 	{
 		state_ = STATE::JUMP;
 		jump_force_ = -10;

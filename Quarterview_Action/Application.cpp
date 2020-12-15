@@ -1,7 +1,7 @@
 #include <DxLib.h>
 
 #include "common.h"
-
+#include "Input/KeyBoard.h"
 #include "Scene/SceneBase.h"
 #include "Scene/TitleScene.h"
 #include "Application.h"
@@ -32,11 +32,12 @@ bool Application::SysInit(void)
 void Application::Run(void)
 {
 	unique_base scene = std::make_unique<TitleScene>();
-
+	auto keyboard = std::make_unique<KeyBoard>();
 	while (ProcessMessage() != -1 && !isShutDown())
 	{
+		keyboard->UpDate();
 		ClearDrawScreen();
-		scene = scene->Run(move(scene));
+		scene = scene->Run(move(scene),keyboard);
 		scene->Render();
 		ScreenFlip();
 	}

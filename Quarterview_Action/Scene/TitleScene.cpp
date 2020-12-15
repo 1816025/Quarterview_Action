@@ -22,10 +22,9 @@ TitleScene::~TitleScene()
 {
 }
 
-unique_base TitleScene::Run(unique_base own)
+unique_base TitleScene::Run(unique_base own, std::unique_ptr<KeyBoard>& keyboad)
 {
-	lpKeyBoard.UpDate();
-	if (lpKeyBoard.GetKeyTrigger(KEY_INPUT_SPACE))
+	if (keyboad->GetKeyTrigger(KEY_INPUT_SPACE))
 	{
 		camera_->~Camera();
 		return std::make_unique<GameScene>(field_);

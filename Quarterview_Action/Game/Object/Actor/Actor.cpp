@@ -53,7 +53,6 @@ void Actor::Render(std::string name)
 
 void Actor::UpDate(void)
 {
-	shotmng_->AddBullet(name_, data_.pos, data_.dir);
 	Object::UpDate();
 }
 

@@ -1,5 +1,6 @@
 #pragma once
-
+#include <mutex>
+class KeyBoard;
 class SceneBase;
 
 class Application
@@ -14,5 +15,6 @@ public:
 	bool isShutDown(void);
 	//I—¹ˆ—
 	void ShutDown(void);
+
 };
 

@@ -1,5 +1,5 @@
 #include "../Collision.hpp"
-
+#include "../Input/KeyBoard.h"
 #include "../Camera.h"
 #include "../Game/Object/Object.h"
 #include "../Game/Object/Sky.h"
@@ -30,10 +30,10 @@ GameScene::~GameScene()
 	int a = 0;
 }
 
-unique_base GameScene::Run(unique_base own)
+unique_base GameScene::Run(unique_base own, std::unique_ptr<KeyBoard>& keyboad)
 {
 	camera_->UpDate();
-	player_->UpDate();
+	player_->UpDate(keyboad);
 	enemy_->UpDate();
 
 	//“G‚ÆPlayer
@@ -44,7 +44,8 @@ unique_base GameScene::Run(unique_base own)
 		}
 		if (collision_->TvsS(player_->GetPos(), 15, enemy.ptr->GetShotMng(), 50))
 		{
-			return std::move(std::make_unique<ResultScene>(false));
+			TRACE("%s\n",enemy.name.c_str())
+			//return std::move(std::make_unique<ResultScene>(false));
 		}
 		if (collision_->TvsS(enemy.ptr->GetPos(), 15, player_->GetShotMng(), 100))
 		{

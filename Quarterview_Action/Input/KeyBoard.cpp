@@ -1,6 +1,14 @@
 #include <DxLib.h>
 #include "KeyBoard.h"
 
+KeyBoard::KeyBoard()
+{
+}
+
+KeyBoard::~KeyBoard()
+{
+}
+
 bool KeyBoard::UpDate(void)
 {
 	_key_data_old = _key_data;

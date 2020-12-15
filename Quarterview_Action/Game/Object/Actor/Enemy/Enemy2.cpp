@@ -26,6 +26,12 @@ Enemy2::Enemy2(const shared_Field field,const shared_ShotMng shotmng)
 	Init(id, shadow,data);
 }
 
+void Enemy2::UpDate(void)
+{
+	shotmng_->AddBullet(name_, data_.pos, data_.dir);
+	Actor::UpDate();
+}
+
 Enemy2::~Enemy2()
 {
 }

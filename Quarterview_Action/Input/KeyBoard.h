@@ -1,15 +1,11 @@
 #pragma once
 #include <array>
-#define lpKeyBoard KeyBoard::GetInstance()
 
 class KeyBoard
 {
 public:
-	static KeyBoard& GetInstance(void)
-	{
-		static KeyBoard s_Insrance;
-		return s_Insrance;
-	}
+	KeyBoard();
+	~KeyBoard();
 
 	bool UpDate(void);
 	bool GetKeyTrigger(int key);

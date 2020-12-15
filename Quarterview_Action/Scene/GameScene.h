@@ -1,6 +1,8 @@
 #pragma once
 #include "SceneBase.h"
 
+class KeyBoad;
+
 class Field;
 class Camera;
 class Player;
@@ -14,7 +16,7 @@ public:
 	GameScene();
 	GameScene(std::shared_ptr<Field> field);
 	~GameScene();
-	unique_base Run(unique_base own);
+	unique_base Run(unique_base own, std::unique_ptr<KeyBoard>& keyboad);
 	void Render(void);
 	void Init();
 private:

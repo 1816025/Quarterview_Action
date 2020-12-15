@@ -13,7 +13,7 @@ class Player:
 public:
 	Player(const shared_Field field);
 	~Player();
-	void UpDate();
+	void UpDate(std::unique_ptr<KeyBoard>& keyboad);
 
 	const VECTOR& GetPos(void)
 	{

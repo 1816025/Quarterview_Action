@@ -14,6 +14,7 @@ public:
 	Enemy1();
 	Enemy1(const shared_Field& field, const shared_ShotMng& shotmng);
 	virtual ~Enemy1();
+	void UpDate(void);
 	//virtual void UpDate();
 };
 
