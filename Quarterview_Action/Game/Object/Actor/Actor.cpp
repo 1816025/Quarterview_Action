@@ -59,7 +59,11 @@ void Actor::UpDate(void)
 void Actor::DrawStatus()
 {
 	VECTOR pos = ConvWorldPosToScreenPos(VGet(data_.pos.x, data_.pos.y + 500.0f, data_.pos.z));
-	DrawFormatString(pos.x, pos.y, 0x8888ff, "name:%s\npos.x: %05.0f\npos.y: %05.0f\npos.z: %05.0f", name_.c_str(), data_.pos.x, data_.pos.y, data_.pos.z);
+	DrawFormatString(pos.x, pos.y, 0x8888ff, "name:%s\n\npos.x: %05.0f\npos.y: %05.0f\npos.z: %05.0f", name_.c_str(), data_.pos.x, data_.pos.y, data_.pos.z);
+	if (name_ == "Player")
+	{
+		DrawFormatString(pos.x, pos.y, 0xff8888, "\nLifePoint:%d", Object::GetLifePoint());
+	}
 }
 
 void Actor::Animation(int no)

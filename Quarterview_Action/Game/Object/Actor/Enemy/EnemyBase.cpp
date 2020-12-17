@@ -1,4 +1,5 @@
 #include "../../Shot/ShotMng.h"
+#include "../../../Field.h"
 #include "Enemy1.h"
 #include "Enemy2.h"
 #include "EnemyBase.h"
@@ -45,13 +46,31 @@ void EnemyBase::Spawner(EnemyType id)
 	{
 	case EnemyType::Kiritan:
 		status.name = "Kiritan";
-		status.ptr = enemy1_;
-		enemyList_.emplace_back(status);
+		if (enemy1_->Object::field_->isBlock(enemy1_->GetPos().x, enemy1_->GetPos().y, enemy1_->GetPos().z))
+		{
+			status.ptr = enemy1_;
+			enemyList_.emplace_back(status);
+			break;
+		}
+		else
+		{
+			enemy1_->AddPos(VGet(0,0,100));
+			Spawner(EnemyType::Kiritan);
+		}
 		break;
 	case EnemyType::Itako:
 		status.name = "Itako";
-		status.ptr = enemy2_;
-		enemyList_.emplace_back(status);
+		if (enemy2_->Object::field_->isBlock(enemy2_->GetPos().x, enemy2_->GetPos().y, enemy2_->GetPos().z))
+		{
+			status.ptr = enemy2_;
+			enemyList_.emplace_back(status);
+			break;
+		}
+		else
+		{
+			enemy2_->AddPos(VGet(100, 0, 0));
+			Spawner(EnemyType::Itako);
+		}
 		break;
 	default:
 		

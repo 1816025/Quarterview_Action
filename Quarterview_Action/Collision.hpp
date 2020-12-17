@@ -20,9 +20,9 @@ struct Collision
 		}
 		return false;
 	};
-	bool TvsS(VECTOR pos_a, float r_a, std::shared_ptr<ShotMng> shotmng, float r_b)
+	bool TvsS(VECTOR pos_a, float r_a, std::shared_ptr<ShotMng> shotmng,std::string name, float r_b)
 	{
-		for (auto shot : shotmng->GetShotList())
+		for (auto shot : shotmng->GetShotList(name))
 		{
 			if (SvsS(pos_a, r_a, shot.shot->GetPos(), r_b))
 			{

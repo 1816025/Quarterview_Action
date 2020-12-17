@@ -30,11 +30,11 @@ public:
 	void AddBullet(const std::string name,const VECTOR& pos, const int& dir);
 	void UpDate(std::string name);
 	void Render(std::string name);
-	const std::list<ShotData> GetShotList(void);
+	const std::list<ShotData> GetShotList(std::string name);
 private:
 	ShadowParam shadow_;
 	std::map<std::string,int> interval_;
 	ShooterType type_;
-	std::list<ShotData> shotList_;
+	std::map<std::string,std::list<ShotData>> shotList_;
 };
 

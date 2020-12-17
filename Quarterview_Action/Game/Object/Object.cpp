@@ -84,3 +84,13 @@ void Object::Collision()
 	}
 }
 
+void Object::ReduceLife(void)
+{
+	lifePoint_--;
+}
+
+int Object::GetLifePoint(void)
+{
+	return lifePoint_;
+}
+

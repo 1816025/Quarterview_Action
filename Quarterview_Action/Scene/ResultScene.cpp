@@ -8,7 +8,7 @@ ResultScene::ResultScene()
 
 ResultScene::ResultScene(bool alive)
 {
-	TRACE("Result\n")
+	TRACE("Result(%s)\n",alive?"clear":"dead");
 	aliveFlag = alive;
 }
 

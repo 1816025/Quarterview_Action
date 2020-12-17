@@ -1,6 +1,5 @@
 #include <DxLib.h>
 #include <cmath>
-#include "../../../Input/KeyBoard.h"
 #include "../../../Input/Mouse.h"
 #include "../Shot/ShotMng.h"
 #include "../../Field.h"
@@ -14,13 +13,14 @@ Player::Player(const shared_Field field)
 		id,
 		6,
 		0.0f,
-		VGet(100.0f,0.0f,50.0f),
+		VGet(150.0f,0.0f,50.0f),
 		VGet((DX_PI_F / 180 * -90),((DX_PI_F / 180) * ((6 * 45) - 90)),0.0f),
 		VGet(1.0f,1.0f,1.0f)
 	};
 	Init(id,shadow,data);
 
 	name_ = "Player";
+	lifePoint_ = 10;
 	field_ = field;
 	data.id = MV1LoadModel("model/bullet/bullet2.mv1");
 	shotmng_ = std::make_shared<ShotMng>(ShooterType::PLAYER,data.id,field_);

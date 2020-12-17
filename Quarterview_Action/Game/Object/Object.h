@@ -17,9 +17,18 @@ public:
 	{
 		return data_.pos;
 	}
+	VECTOR AddPos(VECTOR pos)
+	{
+		data_.pos.x += pos.x;
+		data_.pos.y += pos.y;
+		data_.pos.z += pos.z;
+		return data_.pos;
+	}
 
 	void UpDate(void);
 	void Render(void);
+	void ReduceLife(void);
+	int GetLifePoint(void);
 	void Collision();
 	const std::shared_ptr<ShotMng> GetShotMng(void)
 	{
@@ -28,6 +37,7 @@ public:
 protected:
 	void SwitchGravity();
 	std::string name_;
+	int lifePoint_;
 
 	Param data_;
 

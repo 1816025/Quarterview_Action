@@ -1,8 +1,10 @@
 #pragma once
 #include <mutex>
+#include "../../../Input/KeyBoard.h"
 #include "Actor.h"
 #include "../../../common.h"
 
+class KeyBoad;
 class ShotMng;
 class Field;
 
@@ -14,7 +16,6 @@ public:
 	Player(const shared_Field field);
 	~Player();
 	void UpDate(std::unique_ptr<KeyBoard>& keyboad);
-
 	const VECTOR& GetPos(void)
 	{
 		return data_.pos;

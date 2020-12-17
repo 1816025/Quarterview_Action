@@ -35,10 +35,10 @@ void ShotMng::AddBullet(const std::string name, const VECTOR& pos, const int& di
 		switch (type_)
 		{
 		case ShooterType::PLAYER:
-			shotList_.push_front(ShotData{ name,new Shot(data_.pos, dir,data_,shadow_, field_) });
+			shotList_[name].push_front(ShotData{ name,new Shot(data_.pos, dir,data_,shadow_, field_) });
 			break;
 		case ShooterType::ENEMY:
-			shotList_.push_front(ShotData{ name, new EnemyShot(pos, dir, data_, shadow_, field_)});
+			shotList_[name].push_front(ShotData{ name, new EnemyShot(pos, dir, data_, shadow_, field_)});
 			break;
 		default:
 			break;
@@ -50,7 +50,7 @@ void ShotMng::UpDate(std::string name)
 {
 	if (!shotList_.empty())
 	{
-		for (auto itr = shotList_.begin(); itr != shotList_.end(); )
+		for (auto itr = shotList_[name].begin(); itr != shotList_[name].end(); )
 		{
 			if ((*itr).unitName == name)
 			{
@@ -58,7 +58,7 @@ void ShotMng::UpDate(std::string name)
 			}
 			if ((*itr).shot->IsRemove())
 			{
-				itr = shotList_.erase(itr);
+				itr = shotList_[name].erase(itr);
 			}
 			else
 			{
@@ -73,7 +73,7 @@ void ShotMng::Render(std::string name)
 	DrawFormatString(0, 0, 0xff0000, "_shot.size() == %d", shotList_.size());
 	if (!shotList_.empty())
 	{
-		for (auto shot : shotList_)
+		for (auto shot : shotList_[name])
 		{
 			if (shot.unitName == name)
 			{
@@ -83,7 +83,7 @@ void ShotMng::Render(std::string name)
 	}
 }
 
-const std::list<ShotData> ShotMng::GetShotList(void)
+const std::list<ShotData> ShotMng::GetShotList(std::string name)
 {
-	return shotList_;
+	return shotList_[name];
 }
